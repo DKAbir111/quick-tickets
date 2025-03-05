@@ -7,7 +7,7 @@ export default function TicketType() {
   return (
     <Box sx={{display:'flex', alignItems:'center', gap:1, mt:6}}>
 
-      <Button variant="contained" sx={{height:'44px',textTransform: 'none', backgroundColor:'#e34825',gap:1}}><AirplanemodeActiveIcon />Plane Air Ticket</Button>
+      <Button variant="contained" sx={{height:'44px',textTransform: 'none', backgroundColor:'#e34825',gap:1, fontWeight:'500'}}><AirplanemodeActiveIcon />Air Ticket</Button>
 
       <Button variant="contained" sx={{height:'44px',textTransform: 'none', backgroundColor:'#e34825',gap:1}}><ApartmentIcon />Hotel</Button>
 

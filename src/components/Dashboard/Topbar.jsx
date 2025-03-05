@@ -21,16 +21,16 @@ export default function Topbar() {
       </div>
 
 {/* content */}
-<Marquee>
+<Marquee style={{color:'#333333', fontSize:'14px'}}>
 
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore distinctio vitae facere voluptates iure repudiandae est commodi culpa, qui modi!
+প্রিয় ট্রেড পার্টনার, আমাদের সাথে হোয়াটসঅ্যাপ এ যোগাযোগ করতে উপরে থাকা হোয়াটসঅ্যাপ বাটনটিতে ক্লিক করুন, অথবা +৮৮০ ১৭৫৫ ৫৭২ ০৯৮ এবং +৮৮০ ১৭৫৫ ৫৭২ 
 </Marquee>
 
 
       <div style={{ position:'absolute', right:'0px',zIndex:"10",backgroundColor:'white'}}>
        
      <div>
-     <Button variant="contained" sx={{backgroundColor:'#e34825', gap:1, borderRadius:'50px',marginRight:'8px'}}> <TbCoinTakaFilled /> Check Balance</Button>
+     <Button variant="contained" sx={{backgroundColor:'#e34825', gap:1, borderRadius:'50px',marginRight:'8px', textTransform:'none'}}> <TbCoinTakaFilled style={{fontSize:'25px'}}/> Check Balance</Button>
      </div>
      </div>
       </Box>
