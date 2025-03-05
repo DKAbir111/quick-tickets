@@ -1,10 +1,13 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
+import DashBoardPage from '../pages/DashBoardPage'
+import { Box } from '@mui/material'
 
 export default function Dashboard() {
   return (
-    <div>
+    <Box sx={{display:'flex',backgroundColor:'#ececec'}}>
       <Sidebar/>
-    </div>
+      <DashBoardPage/>
+    </Box>
   )
 }

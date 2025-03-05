@@ -1,23 +1,26 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-
+import { CiLogout } from "react-icons/ci";
+import { FaDatabase } from "react-icons/fa";
+import logo from '../assets/logo.png'
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import { IoWalletOutline } from "react-icons/io5";
+import { CiUser } from "react-icons/ci";
+import { AiOutlineBarChart } from "react-icons/ai";
+import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 const drawerWidth = 240;
 
 function Sidebar(props) {
@@ -41,23 +44,114 @@ function Sidebar(props) {
   };
 
   const drawer = (
-    <div>
-      <Toolbar />
-  
+    <div className='product-sans-text'>
+      
       <List>
      
+
+     {/* logo */}
+
+     <ListItem disablePadding>
+      <ListItemButton sx={{py:5}}>
+      <img src={logo} alt="" />
+      </ListItemButton>
+         
+          </ListItem>
+
+
          {/* Dashboard */}
    
        <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                 <MailIcon />
+                 <HomeIcon  />
               </ListItemIcon>
               <ListItemText primary={"Dashboard"} />
             </ListItemButton>
           </ListItem>
+
+          {/* Search */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <SearchIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Search Pad"} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* Bookings */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <FaDatabase  />
+              </ListItemIcon>
+              <ListItemText primary={"Bookings"} />
+            </ListItemButton>
+          </ListItem>
+
+
+          {/* Settings */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <SettingsIcon  />
+              </ListItemIcon>
+              <ListItemText primary={"Settings"} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* Wallet */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <IoWalletOutline  />
+              </ListItemIcon>
+              <ListItemText primary={"Wallet"} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* Account */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <CiUser  />
+              </ListItemIcon>
+              <ListItemText primary={"Account"} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* Manage */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <ManageHistoryIcon  />
+              </ListItemIcon>
+              <ListItemText primary={"Manage"} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* Ot Reports */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <AiOutlineBarChart  />
+              </ListItemIcon>
+              <ListItemText primary={"Ot Reports"} />
+            </ListItemButton>
+          </ListItem>
+
+          {/* logout */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                 <CiLogout   />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} />
+            </ListItemButton>
+          </ListItem>
    
-    
+     
       </List>
 
       
@@ -70,7 +164,6 @@ function Sidebar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-     
         <Toolbar>
           <IconButton
             color="inherit"
