@@ -1,6 +1,5 @@
-import { Button, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
@@ -18,15 +17,14 @@ export default function TripType() {
   const dayName = currentDate.toLocaleString('en-US', { weekday: 'long' });
   const dayOfMonth = currentDate.getDate();
   console.log(currentDate)
-  
+
+
   useEffect(() => {
-    axios
-      .post('https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion', 
-        { keyword: 'dxb' },
-        { headers: { 'Content-Type': 'application/json' } }
-      )
-      .then((response) => {
-        setData(response.data.data); 
+    axios.post('https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion', {
+      keyword: 'dxb'
+    })
+      .then(res => {
+        setData(res.data)
         setLoading(false);
       })
       .catch((error) => {
@@ -35,114 +33,107 @@ export default function TripType() {
       });
   }, []);
 
-
+  console.log(data)
+  console.log(loading)
   return (
-   <Box sx={{my:3}}>
-{/* button */}
-<div style={{display:'flex', alignItems:'center', gap:20}}>
-<Button variant="contained" sx={{textTransform:'none', backgroundColor:'#202124'}}>One Way</Button>
-<Button variant="text" sx={{textTransform:'none', color:'black'}}>Round Way</Button>
-<Button variant="text" sx={{textTransform:'none', color:'black'}}>Multi City </Button>
-</div>
-
-
-<Box
-  sx={{
-    display: "grid",
-    gridTemplateColumns: "repeat(9, 1fr)",
-    gridTemplateRows: "repeat(2, 56px)", // Fixed height for each row
-    gap: 2,
-    py: 5,
-  }}
->
-  {/* First Column - One Row Span */}
-  <Box
-    sx={{
-      gridColumn: "span 3",
-      display: "flex",
-      flexDirection: "column",
-      gap: 2,
-      height: '70px', // Ensure the height is fixed
-    }}
-  >
-    <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, height: '100%' }}>
-      <FlightTakeoffIcon /> <Typography sx={{ fontWeight: 'bold' }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
-    </Paper>
-    <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, height: '100%' }}>
-      <FlightLandIcon /> <Typography sx={{ fontWeight: 'bold' }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
-    </Paper>
-  </Box>
-
-  {/* Second Column - Two Row Span */}
-  <Box
-    sx={{
-      gridRow: "span 2", 
-      display: "flex",
-      flexDirection: "column",
-      height: '100%', // Ensure the height is fixed
-    }}
-  >
-    <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', height: '100%' }}>
-      <CalendarMonthIcon />
-      <div>
-        <Typography variant="caption">{monthName}</Typography>
-        <Typography variant="h3">{dayOfMonth}</Typography>
-        <Typography variant="caption">{dayName}</Typography>
+    <Box sx={{ my: 4 }}>
+      {/* button */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <Button variant="contained" sx={{ textTransform: 'none', backgroundColor: '#202124', boxShadow: 'none', fontWeight: 500 }}>One Way</Button>
+        <Button variant="text" sx={{ textTransform: 'none', color: '#202124', fontWeight: 500 }}>Round Way</Button>
+        <Button variant="text" sx={{ textTransform: 'none', color: '#202124', fontWeight: 500 }}>Multi City </Button>
       </div>
-    </Paper>
-  </Box>
-
-  {/* Third Column - Two Row Span */}
-  <Box
-    sx={{
-      gridRow: "span 2",
-      display: "flex",
-      flexDirection: "column",
-      height: '100%', // Ensure the height is fixed
-    }}
-  >
-    <Paper sx={{ padding: 2, textAlign: "center", height: '100%' }}>
-      <CalendarMonthIcon />
-      <Typography sx={{ fontSize: '14px' }}>Click to Return Flight</Typography>
-    </Paper>
-  </Box>
-
-  {/* Fourth Column - One Row Span */}
-  <Box
-    sx={{
-      gridColumn: "span 3",
-      display: "flex",
-      flexDirection: "column",
-      gap: 2,
-      height: '100%', // Ensure the height is fixed
-    }}
-  >
-    <Paper sx={{ padding: 2, textAlign: "center", height: '100%' }}>
-      <Typography>Economy</Typography>
-    </Paper>
-    <Paper sx={{ padding: 2, textAlign: "center", height: '100%' }}>
-      <Typography>1 Passenger</Typography>
-    </Paper>
-  </Box>
-
-  {/* Fifth Column - Two Row Span */}
-  <Box
-    sx={{
-      gridRow: "span 2", 
-      display: "flex",
-      flexDirection: "column",
-      height: '100%', // Ensure the height is fixed
-    }}
-  >
-    <Paper sx={{ padding: 2, textAlign: "center", backgroundColor: '#2a2e2d', color: 'white', height: '100%' }}>
-      <SearchIcon sx={{ fontSize: '36px' }} />
-      <Typography>Search</Typography>
-    </Paper>
-  </Box>
-</Box>
 
 
-<SearchType/>
-</Box>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(9, 1fr)",
+          gridTemplateRows: "repeat(2, 55px)",
+          gap: 1,
+          py: 5,
+        }}
+      >
+        {/* First Column */}
+        <Box
+          sx={{
+            gridColumn: "span 4",
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
+          <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
+            <FlightTakeoffIcon /> <Typography sx={{ fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+          </Paper>
+          <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
+            <FlightLandIcon /> <Typography sx={{ fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+          </Paper>
+        </Box>
+
+        {/* Second Column */}
+        <Box
+          sx={{
+            gridRow: "span 2",
+          }}
+        >
+          <Paper sx={{ padding: 1, textAlign: "center", display: 'flex', boxShadow: 'none' }}>
+            <CalendarMonthIcon />
+            <Stack alignItems="center">
+              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
+              <Typography variant="h3">{dayOfMonth}</Typography>
+              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayName}</Typography>
+            </Stack>
+          </Paper>
+        </Box>
+
+        {/* Third Column */}
+        <Box
+          sx={{
+            gridRow: "span 2",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Paper sx={{ padding: 1, textAlign: "start", height: '128px', boxShadow: 'none' }}>
+            <CalendarMonthIcon />
+            <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Click to Return Flight</Typography>
+          </Paper>
+        </Box>
+
+        {/* Fourth Column  */}
+        <Box
+          sx={{
+            gridColumn: "span 2",
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
+          <Paper sx={{ padding: 2, textAlign: "center", height: '100%', boxShadow: 'none' }}>
+            <Typography sx={{ fontWeight: 500 }}>Economy</Typography>
+
+          </Paper>
+          <Paper sx={{ padding: 2, textAlign: "center", height: '100%', boxShadow: 'none' }}>
+            <Typography sx={{ fontWeight: 500 }}>1 Passenger</Typography>
+          </Paper>
+        </Box>
+
+        {/* Fifth Column */}
+        <Box
+          sx={{
+            gridRow: "span 2",
+          }}
+        >
+          <Paper sx={{ padding: 2, display: 'flex', backgroundColor: '#2a2e2d', color: 'white', height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <SearchIcon sx={{ fontSize: '45px' }} />
+            <Typography sx={{ fontWeight: 500, fontSize: '17px' }}>Search</Typography>
+          </Paper>
+        </Box>
+      </Box>
+
+
+      <SearchType />
+    </Box >
   )
 }

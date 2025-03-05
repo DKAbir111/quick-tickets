@@ -1,63 +1,97 @@
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import React from "react";
+import { FormControlLabel, Checkbox } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
-}));
+const SearchType = () => {
+  return (
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "repeat(9, 1fr)",
+        gap: 2,
+      }}
+    >
+      {/* First Column */}
+      <Grid item sx={{ gridColumn: "span 3", background: "white", px: 1 }}>
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Regular Search"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Advanced Search"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+      </Grid>
 
-const checkboxStyles = {
-  '& .MuiCheckbox-root': {
-    borderRadius: 0, // Square checkbox
-  },
-  '& .Mui-checked': {
-    color: '#e34825', // Color when checked
-  },
-  '& .MuiCheckbox-root': {
-    color: '#e34825', // Color when unchecked
-  },
+      {/* Second Column */}
+      <Grid item sx={{ gridColumn: "span 4", background: "white", px: 1 }}>
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Student Fare"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Umrah Fare"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Seaman Fare"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+      </Grid>
+
+      {/* Third Column */}
+      <Grid item sx={{ gridColumn: "span 2", background: "white", px: 1 }}>
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Seaman Fare"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+      </Grid>
+    </Grid>
+  );
 };
 
-export default function SearchType() {
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
-        <Grid item xs="auto">
-          <Item>
-            <FormControlLabel
-              sx={checkboxStyles}
-              control={<Checkbox />}
-              label="Regular Search"
-            />
-            <FormControlLabel
-              sx={checkboxStyles}
-              control={<Checkbox />}
-              label="Advanced Search"
-            />
-          </Item>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Item>
-            <FormControlLabel sx={checkboxStyles} control={<Checkbox />} label="Regular Search" />
-            <FormControlLabel sx={checkboxStyles} control={<Checkbox />} label="Advanced Search" />
-            <FormControlLabel sx={checkboxStyles} control={<Checkbox />} label="Advanced Search" />
-          </Item>
-        </Grid>
-
-        <Grid item xs>
-          <Item>Select Prefered AirLine</Item>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-}
+export default SearchType;
