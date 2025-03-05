@@ -155,11 +155,14 @@ function Sidebar(props) {
       </List>
 
       <ListItem disablePadding sx={{mb:4}}>
-
-            <ListItemButton>
-            <PermIdentityIcon />
-            
+        
+      <ListItemButton>
+              <ListItemIcon>
+              <PermIdentityIcon /> 
+              </ListItemIcon>
+              <ListItemText sx={{color:'#5F6368'}} primary={"Syed Afridi"} secondary={"Product Manager"} />
             </ListItemButton>
+
           </ListItem>
    
       
