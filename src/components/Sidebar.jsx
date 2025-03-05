@@ -12,14 +12,14 @@ import ListItemText from '@mui/material/ListItemText';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import { CiLogout } from "react-icons/ci";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { FaDatabase } from "react-icons/fa";
 import logo from '../assets/logo.png'
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
-import { IoWalletOutline } from "react-icons/io5";
-import { CiUser } from "react-icons/ci";
-import { AiOutlineBarChart } from "react-icons/ai";
+import WalletIcon from '@mui/icons-material/Wallet';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 const drawerWidth = 240;
 
@@ -44,9 +44,9 @@ function Sidebar(props) {
   };
 
   const drawer = (
-    <div className='product-sans-text'>
+<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
       
-      <List>
+      <List >
      
 
      {/* logo */}
@@ -66,7 +66,7 @@ function Sidebar(props) {
               <ListItemIcon>
                  <HomeIcon  />
               </ListItemIcon>
-              <ListItemText primary={"Dashboard"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Dashboard"} />
             </ListItemButton>
           </ListItem>
 
@@ -76,7 +76,7 @@ function Sidebar(props) {
               <ListItemIcon>
                  <SearchIcon />
               </ListItemIcon>
-              <ListItemText primary={"Search Pad"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Search Pad"} />
             </ListItemButton>
           </ListItem>
 
@@ -86,7 +86,7 @@ function Sidebar(props) {
               <ListItemIcon>
                  <FaDatabase  />
               </ListItemIcon>
-              <ListItemText primary={"Bookings"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Bookings"} />
             </ListItemButton>
           </ListItem>
 
@@ -97,7 +97,7 @@ function Sidebar(props) {
               <ListItemIcon>
                  <SettingsIcon  />
               </ListItemIcon>
-              <ListItemText primary={"Settings"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Settings"} />
             </ListItemButton>
           </ListItem>
 
@@ -105,9 +105,9 @@ function Sidebar(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                 <IoWalletOutline  />
+                 <WalletIcon  />
               </ListItemIcon>
-              <ListItemText primary={"Wallet"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Wallet"} />
             </ListItemButton>
           </ListItem>
 
@@ -115,9 +115,9 @@ function Sidebar(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                 <CiUser  />
+                 <PermIdentityIcon />
               </ListItemIcon>
-              <ListItemText primary={"Account"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Account"} />
             </ListItemButton>
           </ListItem>
 
@@ -127,7 +127,7 @@ function Sidebar(props) {
               <ListItemIcon>
                  <ManageHistoryIcon  />
               </ListItemIcon>
-              <ListItemText primary={"Manage"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Manage"} />
             </ListItemButton>
           </ListItem>
 
@@ -135,9 +135,9 @@ function Sidebar(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                 <AiOutlineBarChart  />
+                 <BarChartIcon />
               </ListItemIcon>
-              <ListItemText primary={"Ot Reports"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Ot Reports"} />
             </ListItemButton>
           </ListItem>
 
@@ -145,15 +145,23 @@ function Sidebar(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                 <CiLogout   />
+                 <LogoutIcon   />
               </ListItemIcon>
-              <ListItemText primary={"Logout"} />
+              <ListItemText sx={{color:'#5F6368'}} primary={"Logout"} />
             </ListItemButton>
           </ListItem>
    
      
       </List>
 
+      <ListItem disablePadding sx={{mb:4}}>
+
+            <ListItemButton>
+            <PermIdentityIcon />
+            
+            </ListItemButton>
+          </ListItem>
+   
       
     </div>
   );
