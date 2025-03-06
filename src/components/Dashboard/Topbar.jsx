@@ -6,15 +6,27 @@ import Marquee from "react-fast-marquee";
 
 export default function Topbar() {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width:'1181px' }}>
+    <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', md: 'nowrap' }, alignItems: 'center', gap: 1, width: { xs: '100%', md: '1181px' }, position: 'relative' }}>
 
       {/* Search Icon Box */}
-      <Paper sx={{ p: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'none', height: '48px', width: '48px' }}>
+      <Paper
+        sx={{
+          p: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: { md: 'center', xs: 'end' },
+          boxShadow: 'none',
+          height: { xs: '40px', md: '48px' },
+          width: { md: '48px', xs: 'auto' },
+          flexGrow: { xs: 1, md: 0 },
+        }}
+      >
         <SearchIcon fontSize="medium" />
       </Paper>
 
+
       {/* Marquee Section */}
-      <Paper sx={{ height: '48px', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', px: 2, boxShadow: 'none',width:'1131px' }}>
+      <Paper sx={{ height: '48px', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', px: 2, boxShadow: 'none', order: 3, width: { xs: '100%', md: '1131px' } }}>
 
         {/* Exclamation Icon */}
         <Box sx={{
@@ -33,19 +45,18 @@ export default function Topbar() {
         <Marquee style={{ color: '#333333', fontSize: '14px' }}>
           প্রিয় ট্রেড পার্টনার, আমাদের সাথে হোয়াটসঅ্যাপ এ যোগাযোগ করতে উপরে থাকা হোয়াটসঅ্যাপ বাটনটিতে ক্লিক করুন, অথবা +৮৮০ ১৭৫৫ ৫৭২ ০৯৮ এবং +৮৮০ ১৭৫৫ ৫৭২
         </Marquee>
-
-        {/* Check Balance Button */}
-        <Box sx={{ position: 'absolute', right: 8, zIndex: 10, bgcolor: 'white' }}>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: '#e34825', gap: 1, borderRadius: '50px', textTransform: 'none', px: 2, boxShadow: 'none' }}
-            startIcon={<TbCoinTakaFilled style={{ fontSize: '25px' }} />}
-          >
-            Check Balance
-          </Button>
-        </Box>
-
       </Paper>
+
+      {/* Check Balance Button */}
+      <Box sx={{ position: { xs: 'relative', md: 'absolute' }, zIndex: 10, right: 4, order: '2' }}>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: '#e34825', gap: 1, borderRadius: '50px', textTransform: 'none', px: 2, boxShadow: 'none' }}
+          startIcon={<TbCoinTakaFilled style={{ fontSize: '25px' }} />}
+        >
+          Check Balance
+        </Button>
+      </Box>
     </Box>
   );
 }

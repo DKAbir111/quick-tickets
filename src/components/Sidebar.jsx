@@ -44,128 +44,128 @@ function Sidebar(props) {
   };
 
   const drawer = (
-<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-      
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+
       <List >
-     
-
-     {/* logo */}
-
-     <ListItem disablePadding>
-      <ListItemButton sx={{py:5}}>
-      <img src={logo} alt="" />
-      </ListItemButton>
-         
-          </ListItem>
 
 
-         {/* Dashboard */}
-   
-       <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <HomeIcon  />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Dashboard"} />
-            </ListItemButton>
-          </ListItem>
+        {/* logo */}
 
-          {/* Search */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <SearchIcon />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Search Pad"} />
-            </ListItemButton>
-          </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton sx={{ py: 5 }}>
+            <img src={logo} alt="" />
+          </ListItemButton>
 
-          {/* Bookings */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <FaDatabase  />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Bookings"} />
-            </ListItemButton>
-          </ListItem>
+        </ListItem>
 
 
-          {/* Settings */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <SettingsIcon  />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Settings"} />
-            </ListItemButton>
-          </ListItem>
+        {/* Dashboard */}
 
-          {/* Wallet */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <WalletIcon  />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Wallet"} />
-            </ListItemButton>
-          </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Dashboard"} />
+          </ListItemButton>
+        </ListItem>
 
-          {/* Account */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <PermIdentityIcon />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Account"} />
-            </ListItemButton>
-          </ListItem>
+        {/* Search */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <SearchIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Search Pad"} />
+          </ListItemButton>
+        </ListItem>
 
-          {/* Manage */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <ManageHistoryIcon  />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Manage"} />
-            </ListItemButton>
-          </ListItem>
+        {/* Bookings */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <FaDatabase />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Bookings"} />
+          </ListItemButton>
+        </ListItem>
 
-          {/* Ot Reports */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Ot Reports"} />
-            </ListItemButton>
-          </ListItem>
 
-          {/* logout */}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                 <LogoutIcon   />
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Logout"} />
-            </ListItemButton>
-          </ListItem>
-   
-     
+        {/* Settings */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Settings"} />
+          </ListItemButton>
+        </ListItem>
+
+        {/* Wallet */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <WalletIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Wallet"} />
+          </ListItemButton>
+        </ListItem>
+
+        {/* Account */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <PermIdentityIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Account"} />
+          </ListItemButton>
+        </ListItem>
+
+        {/* Manage */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <ManageHistoryIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Manage"} />
+          </ListItemButton>
+        </ListItem>
+
+        {/* Ot Reports */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Ot Reports"} />
+          </ListItemButton>
+        </ListItem>
+
+        {/* logout */}
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: '#5F6368' }} primary={"Logout"} />
+          </ListItemButton>
+        </ListItem>
+
+
       </List>
 
-      <ListItem disablePadding sx={{mb:4}}>
-        
-      <ListItemButton>
-              <ListItemIcon>
-              <PermIdentityIcon /> 
-              </ListItemIcon>
-              <ListItemText sx={{color:'#5F6368'}} primary={"Syed Afridi"} secondary={"Product Manager"} />
-            </ListItemButton>
+      <ListItem disablePadding sx={{ mb: 4 }}>
 
-          </ListItem>
-   
-      
+        <ListItemButton>
+          <ListItemIcon>
+            <PermIdentityIcon />
+          </ListItemIcon>
+          <ListItemText sx={{ color: '#5F6368' }} primary={"Syed Afridi"} secondary={"Product Manager"} />
+        </ListItemButton>
+
+      </ListItem>
+
+
     </div>
   );
 
@@ -173,24 +173,24 @@ function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex', boxShadow:'none' }}>
+    <Box sx={{ display: 'flex', boxShadow: 'none' }}>
       <CssBaseline />
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          
-        </Toolbar>
+      <Toolbar sx={{ position: 'absolute' }}>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2, display: { md: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+      </Toolbar>
 
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -201,7 +201,7 @@ function Sidebar(props) {
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           slotProps={{
@@ -215,7 +215,7 @@ function Sidebar(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', md: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open
@@ -223,7 +223,7 @@ function Sidebar(props) {
           {drawer}
         </Drawer>
       </Box>
-      
+
     </Box>
   );
 }

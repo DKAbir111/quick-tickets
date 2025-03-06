@@ -17,56 +17,25 @@ export default function Discount() {
   };
 
   return (
-    <Box className="slider-container" sx={{ width: "1181px", overflow: "hidden" }}>
+    <Box
+      className="slider-container"
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        display: { xs: "none", md: "block" }
+      }}
+    >
       <Slider {...settings}>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box
-            component="img"
-            src={discountImage}
-            alt="Discount image"
-            sx={{ width: "1181px", height: "auto", objectFit: "cover" }}
-          />
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box
-            component="img"
-            src={discountImage}
-            alt="Discount image"
-            sx={{ width: "1181px", height: "auto", objectFit: "cover" }}
-          />
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box
-            component="img"
-            src={discountImage}
-            alt="Discount image"
-            sx={{ width: "1181px", height: "auto", objectFit: "cover" }}
-          />
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box
-            component="img"
-            src={discountImage}
-            alt="Discount image"
-            sx={{ width: "1181px", height: "auto", objectFit: "cover" }}
-          />
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box
-            component="img"
-            src={discountImage}
-            alt="Discount image"
-            sx={{ width: "1181px", height: "auto", objectFit: "cover" }}
-          />
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box
-            component="img"
-            src={discountImage}
-            alt="Discount image"
-            sx={{ width: "1181px", height: "auto", objectFit: "cover" }}
-          />
-        </Box>
+        {[...Array(6)].map((_, index) => (
+          <Box key={index} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Box
+              component="img"
+              src={discountImage}
+              alt="Discount image"
+              sx={{ width: "100%", height: "auto", objectFit: "cover" }}
+            />
+          </Box>
+        ))}
       </Slider>
     </Box>
   );

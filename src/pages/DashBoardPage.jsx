@@ -5,10 +5,12 @@ import TicketType from "../components/Dashboard/TicketType";
 import TripType from "../components/Dashboard/TripType";
 import RecentSearch from "../components/Dashboard/RecentSearch";
 import Discount from "../components/Dashboard/Discount";
+import TopBarMobile from "../components/Dashboard/TopBarMobile";
 
 export default function DashBoardPage() {
   return (
-    <Container  sx={{ py: 3 }}>
+    <Container sx={{ py: { md: 3, xs: 0 }, backgroundColor: '#ececec' }}>
+      <TopBarMobile />
       <Topbar />
       <TicketType />
       <TripType />
