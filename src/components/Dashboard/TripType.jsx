@@ -99,18 +99,25 @@ export default function TripType() {
     setPasengerOpen(!passengerOpen)
   }
 
-  //adult
-  const [adult, setAdult] = useState(0)
+  const [adult, setAdult] = useState(0);
+  const [children, setChildren] = useState(0);
+  const [infant, setInfant] = useState(0);
+
+  // Calculate total passengers dynamically
+  const total = adult + children + infant;
+
   const handleAdultChange = (num) => {
-    if (num === 1) {
-      setAdult(adult + 1)
-    }
-    if (num === -1) {
-      if (adult > 0) {
-        setAdult(adult - 1)
-      }
-    }
-  }
+    setAdult((prev) => Math.max(0, prev + num));
+  };
+
+  const handleChildrenChange = (num) => {
+    setChildren((prev) => Math.max(0, prev + num));
+  };
+
+  const handleInfantChange = (num) => {
+    setInfant((prev) => Math.max(0, prev + num));
+  };
+
   return (
     <Box sx={{ my: 4 }}>
       {/* button */}
@@ -278,7 +285,7 @@ export default function TripType() {
           {/* number of passenger */}
 
           <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none', position: 'relative' }}>
-            <Typography onClick={handleOpenPassenger} sx={{ fontWeight: 500, cursor: 'pointer' }}>{adult} Passenger</Typography>
+            <Typography onClick={handleOpenPassenger} sx={{ fontWeight: 500, cursor: 'pointer' }}>{total} Passenger</Typography>
             {
               passengerOpen && <>
                 <Box sx={{ backgroundColor: 'white', p: 2, position: 'absolute', zIndex: 30, width: '281px', left: '0px', top: '64px', borderRadius: '5px' }}>
@@ -296,21 +303,21 @@ export default function TripType() {
 
 
                   {/* 2nd */}
-                  <Paper sx={{ boxShadow: 'none', display: 'flex', my: 1.5, alignItems: 'center', justifyContent: 'space-between' }}>Adult (12+ years)
+                  <Paper sx={{ boxShadow: 'none', display: 'flex', my: 1.5, alignItems: 'center', justifyContent: 'space-between' }}>Children(2-11 years)
                     <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                      <Paper sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>-</Paper> <Typography sx={{ fontWeight: '600' }}>1 </Typography>
-                      <Paper sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>+</Paper>
+                      <Paper onClick={() => handleChildrenChange(-1)} sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>-</Paper> <Typography sx={{ fontWeight: '600' }}>{children}</Typography>
+                      <Paper onClick={() => handleChildrenChange(1)} sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>+</Paper>
 
 
                     </Box>
 
                   </Paper>
                   {/* 
-   3rd */}
-                  <Paper sx={{ boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>Adult (12+ years)
+                3rd */}
+                  <Paper sx={{ boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>Infant (Unser 2 years)
                     <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                      <Paper sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>-</Paper> <Typography sx={{ fontWeight: '600' }}>1 </Typography>
-                      <Paper sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>+</Paper>
+                      <Paper onClick={() => handleInfantChange(-1)} sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>-</Paper> <Typography sx={{ fontWeight: '600' }}>{infant} </Typography>
+                      <Paper onClick={() => handleInfantChange(1)} sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>+</Paper>
 
 
                     </Box>

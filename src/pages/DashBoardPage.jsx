@@ -6,16 +6,20 @@ import TripType from "../components/Dashboard/TripType";
 import RecentSearch from "../components/Dashboard/RecentSearch";
 import Discount from "../components/Dashboard/Discount";
 import TopBarMobile from "../components/Dashboard/TopBarMobile";
+import { Box } from "@mui/material";
 
 export default function DashBoardPage() {
   return (
-    <Container sx={{ py: { md: 3, xs: 0 }, backgroundColor: '#ececec' }}>
+    <Container sx={{ py: { md: 3, xs: 0 }, px: 0, backgroundColor: '#ececec' }}>
       <TopBarMobile />
-      <Topbar />
-      <TicketType />
-      <TripType />
-      <RecentSearch />
-      <Discount />
+      <Box sx={{ px: 2 }}>
+
+        <Topbar />
+        <TicketType />
+        <TripType />
+        <RecentSearch />
+        <Discount />
+      </Box>
     </Container>
   );
 }
