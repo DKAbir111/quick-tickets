@@ -9,6 +9,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchType from './SearchType';
 import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
+import '../../App.css'
 //date
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"; 
@@ -29,7 +30,15 @@ const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   setIsCalendarOpen((prev) => !prev);
 };
 
-
+//date-return
+  const [isCalendarReturnOpen, setIsCalendarReturnOpen] = useState(false);
+  const [selectedDateReturn, setSelectedDateReturn] = useState(new Date());
+  const monthNameReturn = selectedDateReturn? format(selectedDateReturn, 'MMMM') : '';
+  const dayNameReturn = selectedDateReturn? format(selectedDateReturn, 'eeee') : '';
+  const dayOfMonthReturn = selectedDateReturn? selectedDateReturn.getDate() : '';
+  const toggleCalendarReturn = () => {
+    setIsCalendarReturnOpen((prev) =>!prev);
+  };
   
   useEffect(() => {
     axios.post('https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion', {
@@ -109,6 +118,7 @@ if(type==='roundway'){
       sx={{
         gridRow: "span 2",
         width: '161px',
+        zIndex:10
       }}
     >
       <Paper
@@ -143,21 +153,19 @@ if(type==='roundway'){
         <Box
           sx={{
             gridRow: "span 2",
-            display: "flex",
-            flexDirection: "column",
             width:'161px',
-         
+            zIndex:10
           
           }}
         >
           {
            tripType==='roundway'? <>
-           <Paper sx={{ padding: 1, textAlign: "center",gap:2, display: 'flex', boxShadow: 'none' }}>
+           <Paper onClick={toggleCalendarReturn}  sx={{ padding: 1, textAlign: "center",gap:2, display: 'flex', boxShadow: 'none' }}>
             <CalendarMonthIcon style={{width:'24px'}}/>
             <Stack alignItems="center">
-              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
-              <Typography variant="h3">{dayOfMonth}</Typography>
-              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayName}</Typography>
+              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthNameReturn}</Typography>
+              <Typography variant="h3">{dayOfMonthReturn}</Typography>
+              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayNameReturn}</Typography>
           
             </Stack>
           
@@ -170,6 +178,16 @@ if(type==='roundway'){
           </Paper>
            </>
           }
+          {/* date picker */}
+      {isCalendarReturnOpen && (
+      
+      <DatePicker
+       selected={selectedDate}
+       onChange={(date) => setSelectedDateReturn(date)}
+       inline
+     />
+ 
+   )}
         </Box>
 
         {/* Fourth Column  */}
