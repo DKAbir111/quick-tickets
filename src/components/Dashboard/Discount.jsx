@@ -7,7 +7,7 @@ export default function Discount() {
             <img
                 src={discountImage}
                 alt="Discount image"
-                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                style={{ width: '1181px', height: 'auto', objectFit: 'cover' }}
             />
         </Box>
     )

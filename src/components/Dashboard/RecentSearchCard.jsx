@@ -29,7 +29,7 @@ const card = (
 export default function RecentSearchCard() {
   return (
     <Box >
-      <Card variant="outlined" sx={{ boxShadow: 'none', borderRadius: '7px' }}>{card}</Card>
+      <Card variant="outlined" sx={{ boxShadow: 'none', borderRadius: '7px', width:'185px' }}>{card}</Card>
     </Box>
   );
 }

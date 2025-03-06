@@ -21,7 +21,7 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 function Sidebar(props) {
   const { window } = props;
@@ -173,7 +173,7 @@ function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', boxShadow:'none' }}>
       <CssBaseline />
         <Toolbar>
           <IconButton

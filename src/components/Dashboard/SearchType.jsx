@@ -11,10 +11,11 @@ const SearchType = () => {
         display: "grid",
         gridTemplateColumns: "repeat(9, 1fr)",
         gap: 2,
+      
       }}
     >
       {/* First Column */}
-      <Grid item sx={{ gridColumn: "span 3", background: "white", px: 1 }}>
+      <Grid item sx={{ gridColumn: "span 3", background: "white", px: 1,width:'354px',  height:'34px', display:'flex' }}>
         <FormControlLabel
           control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
           label="Regular Search"
@@ -40,7 +41,7 @@ const SearchType = () => {
       </Grid>
 
       {/* Second Column */}
-      <Grid item sx={{ gridColumn: "span 4", background: "white", px: 1 }}>
+      <Grid item sx={{ gridColumn: "span 4", background: "white", px: 1, width:'444px',height:'34px', display:'flex' }}>
         <FormControlLabel
           control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
           label="Student Fare"
@@ -77,7 +78,7 @@ const SearchType = () => {
       </Grid>
 
       {/* Third Column */}
-      <Grid item sx={{ gridColumn: "span 2", background: "white", px: 1 }}>
+      <Grid item sx={{ gridColumn: "span 2", background: "white", px: 1, width:'353px',height:'34px', display:'flex' }}>
         <FormControlLabel
           control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
           label="Seaman Fare"

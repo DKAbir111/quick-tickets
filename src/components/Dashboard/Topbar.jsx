@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 
 export default function Topbar() {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1, p: 1 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width:'1181px' }}>
 
       {/* Search Icon Box */}
       <Paper sx={{ p: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'none', height: '48px', width: '48px' }}>
@@ -14,7 +14,7 @@ export default function Topbar() {
       </Paper>
 
       {/* Marquee Section */}
-      <Paper sx={{ flexGrow: 1, height: '48px', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', px: 2, boxShadow: 'none' }}>
+      <Paper sx={{ height: '48px', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', px: 2, boxShadow: 'none',width:'1131px' }}>
 
         {/* Exclamation Icon */}
         <Box sx={{

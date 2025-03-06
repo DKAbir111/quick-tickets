@@ -8,11 +8,12 @@ export default function RecentSearch() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
+          gridTemplateColumns: "repeat(6, 1fr)",
           gap: 2,
           py: 5,
         }}
       >
+        <RecentSearchCard />
         <RecentSearchCard />
         <RecentSearchCard />
         <RecentSearchCard />

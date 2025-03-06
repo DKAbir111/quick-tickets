@@ -50,7 +50,7 @@ export default function TripType() {
           display: "grid",
           gridTemplateColumns: "repeat(9, 1fr)",
           gridTemplateRows: "repeat(2, 55px)",
-          gap: 1,
+          gap: '7px',
           py: 5,
         }}
       >
@@ -61,6 +61,7 @@ export default function TripType() {
             display: "flex",
             flexDirection: "column",
             gap: 1,
+            width:'419px'
           }}
         >
           <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
@@ -75,10 +76,11 @@ export default function TripType() {
         <Box
           sx={{
             gridRow: "span 2",
+            width:'161px'
           }}
         >
           <Paper sx={{ padding: 1, textAlign: "center", display: 'flex', boxShadow: 'none' }}>
-            <CalendarMonthIcon />
+            <CalendarMonthIcon style={{width:'24px'}}/>
             <Stack alignItems="center">
               <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
               <Typography variant="h3">{dayOfMonth}</Typography>
@@ -93,11 +95,12 @@ export default function TripType() {
             gridRow: "span 2",
             display: "flex",
             flexDirection: "column",
+            width:'161px'
           }}
         >
           <Paper sx={{ padding: 1, textAlign: "start", height: '128px', boxShadow: 'none' }}>
-            <CalendarMonthIcon />
-            <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Click to Return Flight</Typography>
+            <CalendarMonthIcon style={{width:'24px'}} />
+            <Typography sx={{ fontSize: '14px', fontWeight: 500, width:'94px' }}>Click to Return Flight</Typography>
           </Paper>
         </Box>
 
@@ -108,6 +111,7 @@ export default function TripType() {
             display: "flex",
             flexDirection: "column",
             gap: 1,
+            width:'281px'
           }}
         >
           <Paper sx={{ padding: 2, textAlign: "center", height: '100%', boxShadow: 'none' }}>
@@ -123,6 +127,7 @@ export default function TripType() {
         <Box
           sx={{
             gridRow: "span 2",
+            width:'134px'
           }}
         >
           <Paper sx={{ padding: 2, display: 'flex', backgroundColor: '#2a2e2d', color: 'white', height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

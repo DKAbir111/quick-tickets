@@ -8,7 +8,7 @@ import Discount from "../components/Dashboard/Discount";
 
 export default function DashBoardPage() {
   return (
-    <Container maxWidth="lg" sx={{ py: 3 }}>
+    <Container  sx={{ py: 3 }}>
       <Topbar />
       <TicketType />
       <TripType />
