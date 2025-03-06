@@ -154,7 +154,7 @@ if(type==='roundway'){
           sx={{
             gridRow: "span 2",
             width:'161px',
-            zIndex:10
+            zIndex:10,
           
           }}
         >
@@ -172,7 +172,10 @@ if(type==='roundway'){
           </Paper>
            </>:
            <>
-         <Paper sx={{ padding: 1,textAlign:'center', height: '128px', boxShadow: 'none', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
+         <Paper onClick={()=>{
+          changeTripType('roundway')
+          toggleCalendarReturn()
+          }} sx={{ padding: 1,textAlign:'center', height: '118px', boxShadow: 'none', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
             <AssignmentReturnIcon  style={{fontSize:'40px'}} />
             <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Click to Return Flight</Typography>
           </Paper>
