@@ -9,15 +9,25 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchType from './SearchType';
 import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
+//date
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"; 
+import { format } from 'date-fns';
+import zIndex from '@mui/material/styles/zIndex';
 export default function TripType() {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const currentDate = new Date();
-  const monthName = currentDate.toLocaleString('en-US', { month: 'long' });
-  const dayName = currentDate.toLocaleString('en-US', { weekday: 'long' });
-  const dayOfMonth = currentDate.getDate();
-  console.log(currentDate)
+
+//date
+const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+ const [selectedDate, setSelectedDate] = useState(new Date());
+ const monthName = selectedDate ? format(selectedDate, 'MMMM') : '';
+ const dayName = selectedDate ? format(selectedDate, 'eeee') : '';
+ const dayOfMonth = selectedDate ? selectedDate.getDate() : '';
+ const toggleCalendar = () => {
+  setIsCalendarOpen((prev) => !prev);
+};
 
 
   
@@ -50,6 +60,9 @@ if(type==='oneway'){
 if(type==='roundway'){
   setTripType('roundway')
 }
+  if(type==='multiway'){
+    setTripType('multiway')
+  }
   }
   return (
     <Box sx={{ my: 4 }}>
@@ -60,7 +73,7 @@ if(type==='roundway'){
         <Button onClick={()=>changeTripType('roundway')} variant={`${tripType==="roundway"?"contained":"text"}`} sx={{ textTransform: 'none', backgroundColor: tripType==="roundway"? '#202124':'',color:tripType==="roundway"? '':'#202124', fontWeight: 500 }}>Round Way</Button>
 
 
-        <Button variant="text" sx={{ textTransform: 'none', color: '#202124', fontWeight: 500 }}>Multi City </Button>
+        <Button onClick={()=>changeTripType('multiway')}  variant={`${tripType==="multiway"?"contained":"text"}`} sx={{ textTransform: 'none', backgroundColor: tripType==="multiway"? '#202124':'',color:tripType==="multiway"? '':'#202124', fontWeight: 500 }}>Multi City </Button>
       </div>
 
 
@@ -93,21 +106,38 @@ if(type==='roundway'){
 
         {/* Second Column */}
         <Box
-          sx={{
-            gridRow: "span 2",
-            width:'161px'
-          }}
-        >
-          <Paper sx={{ padding: 1, textAlign: "center",gap:2, display: 'flex', boxShadow: 'none' }}>
-            <CalendarMonthIcon style={{width:'24px'}}/>
-            <Stack alignItems="center">
-              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
-              <Typography variant="h3">{dayOfMonth}</Typography>
-              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayName}</Typography>
-            </Stack>
-          
-          </Paper>
-        </Box>
+      sx={{
+        gridRow: "span 2",
+        width: '161px',
+      }}
+    >
+      <Paper
+        sx={{ padding: 1, textAlign: "center", gap: 2, display: 'flex', boxShadow: 'none' }}
+        onClick={toggleCalendar} 
+      >
+        <CalendarMonthIcon style={{ width: '24px' }} />
+        <Stack alignItems="center">
+          <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>
+            {monthName}
+          </Typography>
+          <Typography variant="h3">{dayOfMonth}</Typography>
+          <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>
+            {dayName}
+          </Typography>
+        </Stack>
+      </Paper>
+      
+{/* date picker */}
+      {isCalendarOpen && (
+      
+         <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          inline
+        />
+    
+      )}
+    </Box>
 
         {/* Third Column */}
         <Box
@@ -117,8 +147,7 @@ if(type==='roundway'){
             flexDirection: "column",
             width:'161px',
          
-           
-            
+          
           }}
         >
           {
@@ -129,6 +158,7 @@ if(type==='roundway'){
               <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
               <Typography variant="h3">{dayOfMonth}</Typography>
               <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayName}</Typography>
+          
             </Stack>
           
           </Paper>
@@ -152,11 +182,11 @@ if(type==='roundway'){
             width:'281px'
           }}
         >
-          <Paper sx={{ padding: 2, textAlign: "center", height: '100%', boxShadow: 'none' }}>
+          <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none' }}>
             <Typography sx={{ fontWeight: 500 }}>Economy</Typography>
 
           </Paper>
-          <Paper sx={{ padding: 2, textAlign: "center", height: '100%', boxShadow: 'none' }}>
+          <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none' }}>
             <Typography sx={{ fontWeight: 500 }}>1 Passenger</Typography>
           </Paper>
         </Box>
