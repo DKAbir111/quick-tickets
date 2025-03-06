@@ -8,6 +8,7 @@ import FlightLandIcon from '@mui/icons-material/FlightLand';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchType from './SearchType';
+import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 export default function TripType() {
 
   const [data, setData] = useState([]);
@@ -19,6 +20,7 @@ export default function TripType() {
   console.log(currentDate)
 
 
+  
   useEffect(() => {
     axios.post('https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion', {
       keyword: 'dxb'
@@ -35,12 +37,29 @@ export default function TripType() {
 
   console.log(data)
   console.log(loading)
+
+
+  //trip types
+  const [tripType,setTripType]=useState('oneway')
+
+
+  const changeTripType=(type)=>{
+if(type==='oneway'){
+  setTripType('oneway')
+}
+if(type==='roundway'){
+  setTripType('roundway')
+}
+  }
   return (
     <Box sx={{ my: 4 }}>
       {/* button */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-        <Button variant="contained" sx={{ textTransform: 'none', backgroundColor: '#202124', boxShadow: 'none', fontWeight: 500 }}>One Way</Button>
-        <Button variant="text" sx={{ textTransform: 'none', color: '#202124', fontWeight: 500 }}>Round Way</Button>
+        <Button onClick={()=>changeTripType('oneway')} variant={`${tripType==="oneway"?"contained":"text"}`} sx={{ textTransform: 'none', backgroundColor: tripType==="oneway"? '#202124':'',color:tripType==="oneway"? '':'#202124',boxShadow: 'none', fontWeight: 500 }}>One Way</Button>
+
+        <Button onClick={()=>changeTripType('roundway')} variant={`${tripType==="roundway"?"contained":"text"}`} sx={{ textTransform: 'none', backgroundColor: tripType==="roundway"? '#202124':'',color:tripType==="roundway"? '':'#202124', fontWeight: 500 }}>Round Way</Button>
+
+
         <Button variant="text" sx={{ textTransform: 'none', color: '#202124', fontWeight: 500 }}>Multi City </Button>
       </div>
 
@@ -79,13 +98,14 @@ export default function TripType() {
             width:'161px'
           }}
         >
-          <Paper sx={{ padding: 1, textAlign: "center", display: 'flex', boxShadow: 'none' }}>
+          <Paper sx={{ padding: 1, textAlign: "center",gap:2, display: 'flex', boxShadow: 'none' }}>
             <CalendarMonthIcon style={{width:'24px'}}/>
             <Stack alignItems="center">
               <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
               <Typography variant="h3">{dayOfMonth}</Typography>
               <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayName}</Typography>
             </Stack>
+          
           </Paper>
         </Box>
 
@@ -95,13 +115,31 @@ export default function TripType() {
             gridRow: "span 2",
             display: "flex",
             flexDirection: "column",
-            width:'161px'
+            width:'161px',
+         
+           
+            
           }}
         >
-          <Paper sx={{ padding: 1, textAlign: "start", height: '128px', boxShadow: 'none' }}>
-            <CalendarMonthIcon style={{width:'24px'}} />
-            <Typography sx={{ fontSize: '14px', fontWeight: 500, width:'94px' }}>Click to Return Flight</Typography>
+          {
+           tripType==='roundway'? <>
+           <Paper sx={{ padding: 1, textAlign: "center",gap:2, display: 'flex', boxShadow: 'none' }}>
+            <CalendarMonthIcon style={{width:'24px'}}/>
+            <Stack alignItems="center">
+              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{monthName}</Typography>
+              <Typography variant="h3">{dayOfMonth}</Typography>
+              <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>{dayName}</Typography>
+            </Stack>
+          
           </Paper>
+           </>:
+           <>
+         <Paper sx={{ padding: 1,textAlign:'center', height: '128px', boxShadow: 'none', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
+            <AssignmentReturnIcon  style={{fontSize:'40px'}} />
+            <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Click to Return Flight</Typography>
+          </Paper>
+           </>
+          }
         </Box>
 
         {/* Fourth Column  */}
