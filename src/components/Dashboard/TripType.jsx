@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from '@mui/material'
+import { Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -10,11 +10,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchType from './SearchType';
 import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 import '../../App.css'
+
+//input
+
+
 //date
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"; 
 import { format } from 'date-fns';
-import zIndex from '@mui/material/styles/zIndex';
 export default function TripType() {
 
   const [data, setData] = useState([]);
@@ -73,6 +76,41 @@ if(type==='roundway'){
     setTripType('multiway')
   }
   }
+
+  //bussiness class
+  const [classOpen, setClassOpen]=useState(false)
+  const handleOpenClass=()=>{
+setClassOpen(!classOpen)
+  }
+
+
+  const [newClass,setNewClass]=useState('')
+  const handleClassChange=(e)=>{
+    e.preventDefault()
+  setNewClass(e.target.value)
+    console.log(newClass)
+    setClassOpen(false)
+  }
+
+  //passenger
+  const [passengerOpen, setPasengerOpen]=useState(false)
+
+  const handleOpenPassenger=()=>{
+    setPasengerOpen(!passengerOpen)
+      }
+
+      //adult
+      const [adult,setAdult]=useState(0)
+      const handleAdultChange=(num)=>{
+if(num===1){
+  setAdult(adult+1)
+}
+        if(num===-1){
+          if(adult>0){
+            setAdult(adult-1)
+          }
+        }
+      }
   return (
     <Box sx={{ my: 4 }}>
       {/* button */}
@@ -118,7 +156,8 @@ if(type==='roundway'){
       sx={{
         gridRow: "span 2",
         width: '161px',
-        zIndex:10
+        zIndex:10,
+        cursor: 'pointer'
       }}
     >
       <Paper
@@ -155,6 +194,7 @@ if(type==='roundway'){
             gridRow: "span 2",
             width:'161px',
             zIndex:10,
+            cursor: 'pointer'
           
           }}
         >
@@ -191,7 +231,7 @@ if(type==='roundway'){
      />
  
    )}
-        </Box>
+  </Box>
 
         {/* Fourth Column  */}
         <Box
@@ -203,16 +243,87 @@ if(type==='roundway'){
             width:'281px'
           }}
         >
-          <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none' }}>
-            <Typography sx={{ fontWeight: 500 }}>Economy</Typography>
+        
+            {/* <Typography sx={{ fontWeight: 500 }}>Economy</Typography> */}
+            <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none',position:'relative' }}>
+            <Typography onClick={handleOpenClass} sx={{ fontWeight: 500,cursor:'pointer' }}>{newClass?newClass:"Economy"}</Typography>
 
+            {
+              classOpen &&<>
+              
+              <Box sx={{backgroundColor:'white', p:2, position:'absolute', zIndex:20, width:'281px' ,left:'0px', top:'65px' }}>
+            <FormControl>
+  
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue="female"
+        name="radio-buttons-group"
+        onChange={handleClassChange}
+      >
+        <FormControlLabel value="Ecomony" control={<Radio />} label="Ecomony" />
+        <FormControlLabel value="Business" control={<Radio />} label="Business" />
+        <FormControlLabel value="Premium First" control={<Radio />} label="Premium First" />
+        <FormControlLabel value="Premium Economy" control={<Radio />} label="Premium Economy" />
+        <FormControlLabel value="Premium Business" control={<Radio />} label="Premium Business" />
+      </RadioGroup>
+    </FormControl>
+            </Box>
+              </>
+            }
           </Paper>
-          <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none' }}>
-            <Typography sx={{ fontWeight: 500 }}>1 Passenger</Typography>
+
+       
+{/* number of passenger */}
+
+  <Paper sx={{ padding: 2, textAlign: "start", height: '100%', boxShadow: 'none',position:'relative' }}>
+            <Typography onClick={handleOpenPassenger} sx={{ fontWeight: 500, cursor:'pointer' }}>{adult} Passenger</Typography>
+{
+  passengerOpen && <>
+  <Box sx={{backgroundColor:'white', p:2, position:'absolute', zIndex:30, width:'281px' ,left:'0px', top:'64px', borderRadius:'5px' }}>
+  
+  {/* 1st */}
+  <Paper sx={{boxShadow:'none', display:'flex', alignItems:'center', justifyContent:'space-between'}}>Adult (12+ years)
+     <Box sx={{display:'flex', gap:1, alignItems:'center'}}>
+      <Paper onClick={()=>handleAdultChange(-1)} sx={{borderRadius:'50%', height:'20px', width:'20px', backgroundColor:'#E34825', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontWeight:700, fontSize:'18px', cursor:'pointer'}}>-</Paper> <Typography sx={{fontWeight:'600'}}>{adult} </Typography>
+      <Paper onClick={()=>handleAdultChange(1)}  sx={{borderRadius:'50%', height:'20px', width:'20px', backgroundColor:'#E34825', display:'flex', alignItems:'center', justifyContent:'center', color:'white',fontWeight:700, fontSize:'18px', cursor:'pointer'}}>+</Paper>
+  
+  
+   </Box> 
+   
+   </Paper>
+
+
+{/* 2nd */}
+<Paper sx={{boxShadow:'none', display:'flex',my:1.5,alignItems:'center', justifyContent:'space-between'}}>Adult (12+ years)
+     <Box sx={{display:'flex', gap:1, alignItems:'center'}}>
+      <Paper  sx={{borderRadius:'50%', height:'20px', width:'20px', backgroundColor:'#E34825', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontWeight:700, fontSize:'18px', cursor:'pointer'}}>-</Paper> <Typography sx={{fontWeight:'600'}}>1 </Typography>
+      <Paper  sx={{borderRadius:'50%', height:'20px', width:'20px', backgroundColor:'#E34825', display:'flex', alignItems:'center', justifyContent:'center', color:'white',fontWeight:700, fontSize:'18px', cursor:'pointer'}}>+</Paper>
+  
+  
+   </Box> 
+   
+   </Paper>
+{/* 
+   3rd */}
+  <Paper sx={{boxShadow:'none', display:'flex', alignItems:'center', justifyContent:'space-between'}}>Adult (12+ years)
+     <Box sx={{display:'flex', gap:1, alignItems:'center'}}>
+      <Paper  sx={{borderRadius:'50%', height:'20px', width:'20px', backgroundColor:'#E34825', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontWeight:700, fontSize:'18px', cursor:'pointer'}}>-</Paper> <Typography sx={{fontWeight:'600'}}>1 </Typography>
+      <Paper  sx={{borderRadius:'50%', height:'20px', width:'20px', backgroundColor:'#E34825', display:'flex', alignItems:'center', justifyContent:'center', color:'white',fontWeight:700, fontSize:'18px', cursor:'pointer'}}>+</Paper>
+  
+  
+   </Box> 
+   
+   </Paper>
+      
+      <Button onClick={handleOpenPassenger} variant='contained' sx={{mt:1, backgroundColor:'#E34825'}}>Done</Button>
+ </Box>
+  </>
+}
+
+
           </Paper>
         </Box>
 
-        {/* Fifth Column */}
         <Box
           sx={{
             gridRow: "span 2",
