@@ -16,7 +16,7 @@ const FlightFilterBar = () => {
                 boxShadow: "none",
                 width: '100%',
                 height: '37px',
-                mt: 2
+                mt: { xs: 2, md: 4 }
             }}
         >
             {/* Left Section: Flights Found + Filters */}

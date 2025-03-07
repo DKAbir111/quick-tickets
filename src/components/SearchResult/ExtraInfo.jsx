@@ -9,6 +9,8 @@ export default function ExtraInfo() {
             height: '56px',
             width: '100%',
             bgcolor: 'white',
+            mt: 2,
+            mb: 3,
             display: { md: 'block', xs: 'none' }
         }}>
 

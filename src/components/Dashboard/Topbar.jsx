@@ -3,8 +3,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import { TbCoinTakaFilled } from "react-icons/tb";
 import { BsExclamation } from "react-icons/bs";
 import Marquee from "react-fast-marquee";
+import { useLocation } from 'react-router-dom';
 
 export default function Topbar() {
+  const location = useLocation()
   return (
     <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', md: 'nowrap' }, alignItems: 'center', gap: 1, maxWidth: { xs: '100%', md: '1181px' }, position: 'relative' }}>
 
@@ -19,6 +21,7 @@ export default function Topbar() {
           height: { xs: '40px', md: '48px' },
           width: { md: '48px', xs: 'auto' },
           flexGrow: { xs: 1, md: 0 },
+          my: location.pathname === "/search-result" ? 3 : 0
         }}
       >
         <SearchIcon fontSize="medium" />
