@@ -43,6 +43,19 @@ const SearchType = () => {
 
       {/* Second Column */}
       <Grid item sx={{ gridColumn: "span 5", background: "white", px: 1, height: '34px', display: 'flex' }}>
+
+        <FormControlLabel
+          control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
+          label="Reguler Fare"
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontSize: "13px",
+              fontWeight: 400,
+              color: "#8C8080",
+            },
+          }}
+        />
+
         <FormControlLabel
           control={<Checkbox sx={{ color: "#D97A4A", "&.Mui-checked": { color: "#E34825" } }} />}
           label="Student Fare"

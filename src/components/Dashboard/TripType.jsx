@@ -64,6 +64,7 @@ export default function TripType() {
   const [classOpen, setClassOpen] = useState(false)
   const handleOpenClass = () => {
     setClassOpen(!classOpen)
+    setPasengerOpen(false)
   }
 
 
@@ -80,6 +81,8 @@ export default function TripType() {
 
   const handleOpenPassenger = () => {
     setPasengerOpen(!passengerOpen)
+    setClassOpen(false)
+
   }
 
   const [adult, setAdult] = useState(0);
@@ -181,7 +184,7 @@ export default function TripType() {
         {/* First Column */}
         <Box
           sx={{
-            gridColumn: { md: "span 4", xs: "span 2" },
+            gridColumn: { md: tripType === "multiway" ? "span 6" : "span 4", xs: "span 2" },
             display: "flex",
             flexDirection: "column",
             gridRow: 'span 2',
@@ -272,6 +275,7 @@ export default function TripType() {
         {/* Third Column */}
         <Box
           sx={{
+            display: { xs: 'block', md: tripType === 'multiway' ? 'none' : 'block' },
             gridRow: "span 2",
             gridColumn: { md: "span 2", xs: "span 1" },
             // width: { md: '161px', xs: '100%' },
@@ -334,7 +338,7 @@ export default function TripType() {
             {
               classOpen && <>
 
-                <Box sx={{ backgroundColor: 'white', p: 2, position: 'absolute', zIndex: 20, width: '281px', left: '0px', top: '65px' }}>
+                <Box sx={{ backgroundColor: 'white', p: 2, position: 'absolute', zIndex: 20, width: '281px', left: '0px', top: '65px', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
                   <FormControl>
 
                     <RadioGroup
@@ -362,7 +366,7 @@ export default function TripType() {
             <Typography onClick={handleOpenPassenger} sx={{ fontWeight: 500, cursor: 'pointer' }}>{total} Passenger</Typography>
             {
               passengerOpen && <>
-                <Box sx={{ backgroundColor: 'white', p: 2, position: 'absolute', zIndex: 30, width: '281px', left: '0px', top: '64px', borderRadius: '5px' }}>
+                <Box sx={{ backgroundColor: 'white', p: 2, position: 'absolute', zIndex: 30, width: '281px', left: '0px', top: '64px', borderRadius: '5px', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
 
                   {/* 1st */}
                   <Paper sx={{ boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>Adult (12+ years)
