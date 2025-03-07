@@ -12,7 +12,8 @@ export default function TopBarMobile() {
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "10px",
-                mb: 4
+                mb: 4,
+                width: '100%'
             }}
         >
             <img

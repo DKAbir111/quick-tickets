@@ -173,7 +173,7 @@ function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex', boxShadow: 'none' }}>
+    <Box sx={{ display: { md: 'flex', xs: 'none' }, boxShadow: 'none' }}>
       <CssBaseline />
       <Toolbar sx={{ position: 'absolute' }}>
         <IconButton
