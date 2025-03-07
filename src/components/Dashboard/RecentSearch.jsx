@@ -30,7 +30,7 @@ export default function RecentSearch() {
   };
 
   return (
-    <Box sx={{ width: '1183px', overflow: 'hidden', display: { xs: 'none', md: 'block' } }}>
+    <Box sx={{ maxWidth: '1183px', overflow: 'hidden', display: { xs: 'none', md: 'block' } }}>
       <Typography sx={{ fontWeight: 500 }}>Your Recent Search</Typography>
       <Box sx={{ py: 5 }}>
         <Slider {...settings} style={{ overflow: 'hidden' }}>

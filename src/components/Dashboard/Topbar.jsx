@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 
 export default function Topbar() {
   return (
-    <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', md: 'nowrap' }, alignItems: 'center', gap: 1, width: { xs: '100%', md: '1181px' }, position: 'relative' }}>
+    <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', md: 'nowrap' }, alignItems: 'center', gap: 1, maxWidth: { xs: '100%', md: '1181px' }, position: 'relative' }}>
 
       {/* Search Icon Box */}
       <Paper

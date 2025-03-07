@@ -1,5 +1,5 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Input, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
@@ -172,7 +172,7 @@ export default function TripType() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { md: "repeat(9, 1fr)", xs: "repeat(2, 1fr)" },
+          gridTemplateColumns: { md: "repeat(13, 1fr)", xs: "repeat(2, 1fr)" },
           gridTemplateRows: { md: "repeat(2, 55px)", xs: "repeat(8, 55px)" },
           gap: 1,
           py: 5,
@@ -186,7 +186,7 @@ export default function TripType() {
             flexDirection: "column",
             gridRow: 'span 2',
             gap: 1,
-            width: { md: '419px', xs: '100%' }
+            // width: { xs: '100%' }
           }}
         >
           <Paper sx={{ position: 'relative', padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
@@ -235,7 +235,8 @@ export default function TripType() {
         <Box
           sx={{
             gridRow: "span 2",
-            width: { md: '161px', xs: '100%' },
+            gridColumn: { md: "span 2", xs: "span 1" },
+            // width: { md: '161px', xs: '100%' },
             zIndex: 10,
             cursor: 'pointer'
           }}
@@ -272,7 +273,8 @@ export default function TripType() {
         <Box
           sx={{
             gridRow: "span 2",
-            width: { md: '161px', xs: '100%' },
+            gridColumn: { md: "span 2", xs: "span 1" },
+            // width: { md: '161px', xs: '100%' },
             zIndex: 10,
             cursor: 'pointer'
 
@@ -316,12 +318,12 @@ export default function TripType() {
         {/* Fourth Column  */}
         <Box
           sx={{
-            gridColumn: "span 2",
+            gridColumn: { md: "span 3", xs: "span 2" },
             display: "flex",
             flexDirection: "column",
             gridRow: 'span 2',
             gap: 1,
-            width: { md: '281px', xs: '100%' }
+            // width: { md: '281px', xs: '100%' }
           }}
         >
 
@@ -408,8 +410,8 @@ export default function TripType() {
         <Box
           sx={{
             gridRow: "span 2",
-            gridColumn: { xs: "span 2 ", md: 'span 1' },
-            width: { md: '134px', xs: "100%" }
+            gridColumn: { xs: "span 2 ", md: 'span 2' },
+            // width: { md: '134px', xs: "100%" }
           }}
         >
           <Paper sx={{ padding: 2, display: 'flex', backgroundColor: '#2a2e2d', color: 'white', height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
