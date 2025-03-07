@@ -1,4 +1,4 @@
-import { Button, FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, Stack, Typography } from '@mui/material'
+import { Button, FormControl, FormControlLabel, FormLabel, Input, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -11,7 +11,6 @@ import SearchType from './SearchType';
 import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
 import '../../App.css'
 
-//input
 
 
 //date
@@ -43,6 +42,8 @@ export default function TripType() {
     setIsCalendarReturnOpen((prev) => !prev);
   };
 
+
+  //data fetch
   useEffect(() => {
     axios.post('https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion', {
       keyword: 'dxb'
@@ -118,6 +119,23 @@ export default function TripType() {
     setInfant((prev) => Math.max(0, prev + num));
   };
 
+
+  //search-1
+  const [firstSearch, setFirstSearch] = useState(false)
+  const handleFirstSearchOpen = () => {
+    setFirstSearch(!firstSearch);
+    setSecondSearch(false);
+  }
+
+  //search-2
+  const [secondSearch, setSecondSearch] = useState(false)
+  const handleSecondSearchOpen = () => {
+    setSecondSearch(!secondSearch);
+    setFirstSearch(false);
+  }
+
+
+
   return (
     <Box sx={{ my: 4 }}>
       {/* button */}
@@ -151,11 +169,45 @@ export default function TripType() {
             width: { md: '419px', xs: '100%' }
           }}
         >
-          <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
-            <FlightTakeoffIcon /> <Typography sx={{ fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+          <Paper sx={{ position: 'relative', padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
+            <FlightTakeoffIcon /> <Typography onClick={handleFirstSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+            {/* Search */}
+            {
+              firstSearch && <>
+
+                <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '10', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
+                  <Input placeholder="Placeholder" sx={{ width: '100%' }} />
+                  <Paper sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 }}>
+                    <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
+                      <Typography sx={{ fontWeight: 'bold' }}>Dhaka, Bangladesh</Typography>
+                      <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>Hazrat Sha Jalal Intl Airport</Typography>
+                    </Box>
+                    <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>DAC</Typography>
+                  </Paper>
+                </Box>
+              </>
+            }
+
           </Paper>
-          <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
-            <FlightLandIcon /> <Typography sx={{ fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+
+          <Paper sx={{ position: 'relative', padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
+            <FlightLandIcon /> <Typography onClick={handleSecondSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+            {/* Search 2 */}
+            {
+              secondSearch && <>
+
+                <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '10', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
+                  <Input placeholder="Placeholder" sx={{ width: '100%' }} />
+                  <Paper sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 }}>
+                    <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
+                      <Typography sx={{ fontWeight: 'bold' }}>Dhaka, Bangladesh</Typography>
+                      <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>Hazrat Sha Jalal Intl Airport</Typography>
+                    </Box>
+                    <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>DAC</Typography>
+                  </Paper>
+                </Box>
+              </>
+            }
           </Paper>
         </Box>
 
