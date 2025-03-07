@@ -19,8 +19,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns';
 export default function TripType() {
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   //date
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -43,23 +41,7 @@ export default function TripType() {
   };
 
 
-  //data fetch
-  useEffect(() => {
-    axios.post('https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion', {
-      keyword: 'dxb'
-    })
-      .then(res => {
-        setData(res.data)
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setLoading(false);
-      });
-  }, []);
 
-  console.log(data)
-  console.log(loading)
 
 
   //trip types
@@ -126,6 +108,29 @@ export default function TripType() {
     setFirstSearch(!firstSearch);
     setSecondSearch(false);
   }
+  //value
+  const [firstSearchResult, setFirstSearchResult] = useState({
+    address: "Dhaka, Bangladesh",
+    name: "Hazrat Sha Jalal Intl Airport",
+    code: "DAC"
+  })
+
+  const handleFirstSearchValueChange = async (event) => {
+    const value = event.target.value.toLowerCase();
+    console.log(value)
+    const response = await axios.post(
+      "https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion",
+      { keyword: value }
+    );
+    setFirstSearchResult({
+      address: response.data.data[0].result.address || "Dhaka, Bangladesh",
+      name: response.data.data[0].result.name || "Hazrat Sha Jalal Intl Airport",
+      code: response.data.data[0].result.code || "DAC"
+    });
+
+  };
+
+
 
   //search-2
   const [secondSearch, setSecondSearch] = useState(false)
@@ -134,6 +139,21 @@ export default function TripType() {
     setFirstSearch(false);
   }
 
+  //vaue
+  // const [secondSearchValue, setSecondSearchValue] = useState('')
+  const handleSecondSearchValueChange = async (event) => {
+    const value = event.target.value.toLowerCase();
+    console.log(value)
+    const response = await axios.post(
+      "https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion",
+      { keyword: value }
+    );
+    setFirstSearchResult({
+      address: response.data.data[0].result.address || "Dhaka, Bangladesh",
+      name: response.data.data[0].result.name || "Hazrat Sha Jalal Intl Airport",
+      code: response.data.data[0].result.code || "DAC"
+    });
+  };
 
 
   return (
@@ -176,13 +196,13 @@ export default function TripType() {
               firstSearch && <>
 
                 <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '10', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
-                  <Input placeholder="Placeholder" sx={{ width: '100%' }} />
+                  <Input onChange={handleFirstSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
                   <Paper sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 }}>
                     <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
-                      <Typography sx={{ fontWeight: 'bold' }}>Dhaka, Bangladesh</Typography>
-                      <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>Hazrat Sha Jalal Intl Airport</Typography>
+                      <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
+                      <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
                     </Box>
-                    <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>DAC</Typography>
+                    <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>{firstSearchResult.code}</Typography>
                   </Paper>
                 </Box>
               </>
@@ -197,13 +217,13 @@ export default function TripType() {
               secondSearch && <>
 
                 <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '10', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
-                  <Input placeholder="Placeholder" sx={{ width: '100%' }} />
+                  <Input onChange={handleSecondSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
                   <Paper sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 }}>
                     <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
-                      <Typography sx={{ fontWeight: 'bold' }}>Dhaka, Bangladesh</Typography>
-                      <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>Hazrat Sha Jalal Intl Airport</Typography>
+                      <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
+                      <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
                     </Box>
-                    <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>DAC</Typography>
+                    <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>{firstSearchResult.code}</Typography>
                   </Paper>
                 </Box>
               </>
