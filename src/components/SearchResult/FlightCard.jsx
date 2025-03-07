@@ -11,13 +11,13 @@ const FlightCard = () => {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(8,1fr)",
+        gridTemplateColumns: { md: "repeat(8,1fr)", xs: "repeat(3,1fr)" },
         alignItems: "center",
         padding: 2,
         borderRadius: 1,
         backgroundColor: "white",
         boxShadow: "none",
-        gap: 2
+        gap: { md: 2, xs: 2 }
       }}
     >
 
@@ -27,16 +27,27 @@ const FlightCard = () => {
         gridColumn: 'span 2',
         display: 'flex',
         alignItems: 'center',
-        gap: 3
+        gap: { md: 3, xs: 1 },
+        order: 1
       }}>
 
         {/* plane */}
-        <img src={logo} alt="" style={{ height: '57px', width: '57px', borderRadius: '50%' }} />
+        <Box
+          component="img"
+          src={logo}
+          alt=""
+          sx={{
+            height: { xs: "32px", md: "57px" },
+            width: { xs: "32px", md: "57px" },
+            borderRadius: "50%",
+          }}
+        />
+
 
         {/* Airline & Flight Details */}
         <Box>
-          <Typography fontWeight="500" color="#333333" fontSize={'17px'}>Biman Bangladesh</Typography>
-          <Typography color="#E34825" fontSize={13}>
+          <Typography fontWeight="500" color="#333333" sx={{ fontSize: { md: '17px', xs: '12px' } }}>Biman Bangladesh</Typography>
+          <Typography color="#E34825" sx={{ fontSize: { sx: '9px', md: '12px' } }} fontSize={13}>
             AS 458
           </Typography>
         </Box>
@@ -49,31 +60,32 @@ const FlightCard = () => {
         display: "flex",
         alignItems: "center",
         gridColumn: "span 3",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
+        order: { md: 2, xs: 3 }
       }}>
         <Box>
-          <Typography fontWeight="500" color="#333333" fontSize={'25px'}>DAC</Typography>
-          <Typography fontSize={13} color="gray" display="flex" gap={'2px'}>
-            <Typography fontSize={13} color="#E34825"  >  19:45,</Typography> Dhaka
+          <Typography fontWeight="500" color="#333333" sx={{ fontSize: { xs: '20px', md: '24px' } }}>DAC</Typography>
+          <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="gray" display="flex" gap={'2px'}>
+            <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="#E34825"  >  19:45,</Typography> Dhaka
           </Typography>
         </Box>
 
         <Box sx={{ textAlign: "center", display: 'flex', flexDirection: 'column' }}>
-          <Typography fontSize={12} color="#A3A1A1">
+          <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="#A3A1A1">
             18h : 35min
           </Typography>
 
           <img src={line} alt="Line image" width={174} />
 
-          <Typography fontSize={12} color="#A3A1A1">
+          <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="#A3A1A1">
             1 stop via BOM
           </Typography>
         </Box>
 
         <Box>
-          <Typography fontWeight="500" fontSize={25}>DXB</Typography>
-          <Typography fontSize={13} color="gray" display='flex' gap={'2px'}>
-            <Typography color="#E34825" fontSize={13}>    19:45,</Typography> Dubai
+          <Typography fontWeight="500" sx={{ fontSize: { xs: '20px', md: '24px' } }}>DXB</Typography>
+          <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="gray" display='flex' gap={'2px'}>
+            <Typography color="#E34825" sx={{ fontSize: { md: '13px', xs: '10px' } }}>    19:45,</Typography> Dubai
           </Typography>
         </Box>
       </Box>
@@ -83,17 +95,18 @@ const FlightCard = () => {
         gridColumn: 'span 1',
         display: 'flex',
         flexDirection: 'column',
-        gap: '4px'
+        gap: { md: 1, xs: '3px' },
+        order: { md: 3, xs: 2 }
       }}>
         <Box display="flex" alignItems="center">
           <ErrorOutlineIcon color="error" fontSize="small" />
-          <Typography color="#E34825" fontSize={14} marginLeft={0.5}>
+          <Typography color="#E34825" sx={{ fontSize: { md: '13px', xs: '9px' } }} marginLeft={0.5}>
             Non Refundable
           </Typography>
         </Box>
         <Box display="flex" alignItems="center">
           <LuggageIcon fontSize="small" />
-          <Typography fontSize={14} marginLeft={0.5}>
+          <Typography sx={{ fontSize: { md: '13px', xs: '9px' } }} marginLeft={0.5}>
             25 KG Details
           </Typography>
         </Box>
@@ -102,8 +115,9 @@ const FlightCard = () => {
       {/* Price & Booking- Column-4 */}
       <Box sx={{
         gridColumn: 'span 1',
-        display: 'flex',
+        display: { md: 'flex', xs: 'none' },
         flexDirection: 'column',
+        order: 4
 
 
       }} >
@@ -118,7 +132,13 @@ const FlightCard = () => {
         </Typography>
       </Box>
 
-      <Box textAlign="center">
+
+
+      {/* Button */}
+      <Box textAlign="center" sx={{
+        display: { md: 'block', xs: 'none' },
+        order: 5
+      }}>
         <Button variant="contained" sx={{ backgroundColor: "#333333", color: "white", borderRadius: '5px' }}>
           BOOK NOW
         </Button>
@@ -128,6 +148,14 @@ const FlightCard = () => {
           </Typography>
           <ExpandMoreIcon fontSize="small" />
         </Box>
+      </Box>
+
+
+      {/* Taka for Mobile */}
+      <Box sx={{ display: { md: 'none', xs: 'block' }, order: 6, gridColumn: 'span 3', borderTop: '1px dashed #E1E1E1' }}>
+        <Typography fontSize={20} fontWeight="500" color="#282E2C" textAlign={'center'} pt={1}>
+          ৳ 45,500
+        </Typography>
       </Box>
     </Box>
   );
