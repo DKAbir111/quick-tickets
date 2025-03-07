@@ -7,8 +7,8 @@ import { LiaHomeSolid } from "react-icons/lia";
 
 export default function BottomNav() {
     return (
-        <Paper sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-            <BottomNavigation sx={{ height: '88px', position: 'relative' }}>
+        <Paper sx={{ display: { xs: 'block', md: 'none' }, position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: '40' }} elevation={3}>
+            <BottomNavigation showLabels={false} sx={{ height: '88px', position: 'relative' }}>
                 <BottomNavigationAction label="Home" icon={<LiaHomeSolid fontSize={25} />} />
                 <BottomNavigationAction label="Favorites" icon={<PiDatabaseLight fontSize={25} />} />
                 <Box

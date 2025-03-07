@@ -65,7 +65,7 @@ const FlightCard = () => {
       }}>
         <Box>
           <Typography fontWeight="500" color="#333333" sx={{ fontSize: { xs: '20px', md: '24px' } }}>DAC</Typography>
-          <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="gray" display="flex" gap={'2px'}>
+          <Typography component="span" sx={{ fontSize: { md: '13px', xs: '10px' } }} color="gray" display="flex" gap={'2px'}>
             <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="#E34825"  >  19:45,</Typography> Dhaka
           </Typography>
         </Box>
@@ -84,7 +84,7 @@ const FlightCard = () => {
 
         <Box>
           <Typography fontWeight="500" sx={{ fontSize: { xs: '20px', md: '24px' } }}>DXB</Typography>
-          <Typography sx={{ fontSize: { md: '13px', xs: '10px' } }} color="gray" display='flex' gap={'2px'}>
+          <Typography component="span" sx={{ fontSize: { md: '13px', xs: '10px' } }} color="gray" display='flex' gap={'2px'}>
             <Typography color="#E34825" sx={{ fontSize: { md: '13px', xs: '10px' } }}>    19:45,</Typography> Dubai
           </Typography>
         </Box>

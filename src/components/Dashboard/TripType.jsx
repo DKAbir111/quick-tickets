@@ -17,6 +17,7 @@ import '../../App.css'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns';
+import NewRoute from './NewRoute';
 export default function TripType() {
 
 
@@ -411,10 +412,12 @@ export default function TripType() {
           </Paper>
         </Box>
 
+        {/* Last column */}
         <Box
           sx={{
             gridRow: "span 2",
             gridColumn: { xs: "span 2 ", md: 'span 2' },
+            cursor: 'pointer'
             // width: { md: '134px', xs: "100%" }
           }}
         >
@@ -423,6 +426,11 @@ export default function TripType() {
             <Typography sx={{ fontWeight: 500, fontSize: '17px' }}>Search</Typography>
           </Paper>
         </Box>
+
+        {/* test */}
+        {
+          tripType === "multiway" && <NewRoute />
+        }
       </Box>
 
 
