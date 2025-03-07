@@ -35,6 +35,7 @@ const FlightFilterBar = () => {
                             fontWeight: 500,
                             height: '24px',
                             fontSize: '11px',
+                            display: { md: 'flex', xs: 'none' },
                             "& .MuiChip-deleteIcon": {
                                 color: '#F1592A'
                             }

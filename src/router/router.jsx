@@ -2,8 +2,8 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import Dashboard from "../layouts/Dashboard";
-import SearchResult from "../pages/SearchResult";
 import DashBoardPage from "../pages/DashBoardPage";
+import SearchResultPage from "../pages/SearchResultPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     },
     {
       path: '/search-result',
-      element: <SearchResult />
+      element: <SearchResultPage />
     }
 
     ]
