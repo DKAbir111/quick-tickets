@@ -75,6 +75,14 @@ export default function NewRoute() {
         toggleSearch(id, 'arrival');
     };
 
+    const formattedFlights = flights.map(flight => ({
+      departure: flight.departure?.code || 'DAC',  
+      arrival: flight.arrival?.code || 'DAC',       
+      departureDate: new Date(flight.date).toISOString().split('T')[0] 
+  }));
+  
+  console.log(formattedFlights);
+  
     return (
         <>
             {flights.map((flight, index) => (
