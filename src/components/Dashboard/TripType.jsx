@@ -1,5 +1,5 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Input, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
@@ -18,6 +18,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns';
 import NewRoute from './NewRoute';
+import SearchTypeContext from '../context/searchTypeContext';
 export default function TripType() {
 
 
@@ -31,7 +32,7 @@ export default function TripType() {
     setIsCalendarOpen((prev) => !prev);
     setIsCalendarReturnOpen(false)
   };
-  console.log(selectedDate.toLocaleDateString('en-CA'))
+ 
 
   //date-return
   const [isCalendarReturnOpen, setIsCalendarReturnOpen] = useState(false);
@@ -59,8 +60,8 @@ export default function TripType() {
     if (type === 'roundway') {
       setTripType('roundway')
     }
-    if (type === 'multiway') {
-      setTripType('multiway')
+    if (type === 'multicity') {
+      setTripType('multicity')
     }
   }
 
@@ -76,9 +77,10 @@ export default function TripType() {
   const handleClassChange = (e) => {
     e.preventDefault()
     setNewClass(e.target.value)
-    // console.log(newClass)
+  
     setClassOpen(false)
   }
+// console.log(newClass)
 
   //passenger
   const [passengerOpen, setPasengerOpen] = useState(false)
@@ -176,6 +178,7 @@ export default function TripType() {
   name:name,
   code:code
     })
+    setFirstSearch(false)
   }
 
 
@@ -193,21 +196,59 @@ export default function TripType() {
   name:name,
   code:code
     })
+    setSecondSearch(false)
   }
 
-
+//search type
+const{regularSearch,fareType}=useContext(SearchTypeContext)
 
 
 // handle submit
 const handleSubmit=()=>{
   const searchValue={
-segmentsList: [
+    passengers: [
+    {
+      type: "ADT",
+      count: adult,
+      ages: []
+    },
+    {
+      type: "CNN",
+      count: children,
+      ages: []
+    },
+    {
+      type: "INF",
+      count: infant,
+      ages: []
+    }
+  ],
+  cabin: newClass,
+  tripType: tripType,
+  "vendorPref": [],
+  studentFare: fareType==="studentFare"?true:false,
+  umrahFare:  fareType==="umrahFare"?true:false,
+  seamanFare: fareType==="seamanFare"?true:false,
+  segmentsList: [
     {
       departure:departureValue.code ,
-      arrival: departureValue.code,
+      arrival: arrivalValue.code,
       departureDate: selectedDate.toLocaleDateString('en-CA')
     }
-  ]
+    ],
+  advanceSearch: regularSearch==="advancedSearch"?true:false,
+  "classes": [],
+  "paxDetails": [],
+  "bookingId": ""
+  
+  }
+
+  if (tripType === "roundway") {
+    searchValue.segmentsList.push({
+      departure: arrivalValue.code,
+      arrival: departureValue.code,
+      departureDate: selectedDateReturn.toLocaleDateString('en-CA')
+    });
   }
 console.log(searchValue)
 }
@@ -221,7 +262,7 @@ console.log(searchValue)
         <Button onClick={() => changeTripType('roundway')} variant={`${tripType === "roundway" ? "contained" : "text"}`} sx={{ textTransform: 'none', backgroundColor: tripType === "roundway" ? '#202124' : '', color: tripType === "roundway" ? '' : '#202124', fontWeight: 500 }}>Round Way</Button>
 
 
-        <Button onClick={() => changeTripType('multiway')} variant={`${tripType === "multiway" ? "contained" : "text"}`} sx={{ textTransform: 'none', backgroundColor: tripType === "multiway" ? '#202124' : '', color: tripType === "multiway" ? '' : '#202124', fontWeight: 500 }}>Multi City </Button>
+        <Button onClick={() => changeTripType('multicity')} variant={`${tripType === "multicity" ? "contained" : "text"}`} sx={{ textTransform: 'none', backgroundColor: tripType === "multicity" ? '#202124' : '', color: tripType === "multicity" ? '' : '#202124', fontWeight: 500 }}>Multi City </Button>
       </div>
 
 
@@ -237,7 +278,7 @@ console.log(searchValue)
         {/* First Column */}
         <Box
           sx={{
-            gridColumn: { md: tripType === "multiway" ? "span 6" : "span 4", xs: "span 2" },
+            gridColumn: { md: tripType === "multicity" ? "span 6" : "span 4", xs: "span 2" },
             display: "flex",
             flexDirection: "column",
             gridRow: 'span 2',
@@ -331,7 +372,7 @@ console.log(searchValue)
         {/* Third Column */}
         <Box
           sx={{
-            display: { xs: 'block', md: tripType === 'multiway' ? 'none' : 'block' },
+            display: { xs: 'block', md: tripType === 'multicity' ? 'none' : 'block' },
             gridRow: "span 2",
             gridColumn: { md: "span 2", xs: "span 1" },
             // width: { md: '161px', xs: '100%' },
@@ -487,7 +528,7 @@ console.log(searchValue)
 
         {/* test */}
         {
-          tripType === "multiway" && <NewRoute />
+          tripType === "multicity" && <NewRoute />
         }
       </Box>
 

@@ -7,10 +7,12 @@ import RecentSearch from "../components/Dashboard/RecentSearch";
 import Discount from "../components/Dashboard/Discount";
 import TopBarMobile from "../components/Dashboard/TopBarMobile";
 import { Box } from "@mui/material";
+import SearchContextProvider from "../components/context/SearchContextProvider";
 
 export default function DashBoardPage() {
   return (
-    <Container sx={{ py: { md: 3, xs: 0 }, px: 0, backgroundColor: '#ececec' }}>
+<SearchContextProvider>
+<Container sx={{ py: { md: 3, xs: 0 }, px: 0, backgroundColor: '#ececec' }}>
       <TopBarMobile />
       <Box sx={{ px: 2 }}>
 
@@ -21,5 +23,6 @@ export default function DashBoardPage() {
         <Discount />
       </Box>
     </Container>
+</SearchContextProvider>
   );
 }
