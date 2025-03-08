@@ -152,7 +152,7 @@ export default function NewRoute() {
                     >
                         <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' ,position: 'relative'}}>
                             <FlightTakeoffIcon />
-                            <Typography onClick={handleFirstSearchOpen} sx={{ fontWeight: 500,cursor: 'pointer' }}>DXB, Dubai Intl Airport</Typography>
+                        <Typography onClick={handleFirstSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>{departureValue.code+","+departureValue.name}</Typography>
 
 {/* pop up 1 */}
                             {
@@ -178,22 +178,23 @@ export default function NewRoute() {
 {/* second row */}
                         <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none',position:'relative' }}>
                             <FlightLandIcon />
-                            <Typography onClick={handleSecondSearchOpen} sx={{ fontWeight: 500,cursor:'pointer' }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+                            
+                          <Typography onClick={handleSecondSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>{arrivalValue.code+","+arrivalValue.name}</Typography>
                              {/* Search 2 */}
                                         {
                                           secondSearch && <>
                             
                                             <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '30', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
-                                              <Input onChange={handleSecondSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
-                                              <Paper onClick={()=>handleArrivalValue(firstSearchResult.address,firstSearchResult.name,firstSearchResult.code)} 
-                                              sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 ,cursor:'pointer',p:1, ":hover":{bgcolor:'#FFF1ED'}}}>
-                                                <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
-                                                  <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
-                                                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>{firstSearchResult.code}</Typography>
-                                              </Paper>
-                                            </Box>
+                                                             <Input onChange={handleSecondSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
+                                                             <Paper onClick={()=>handleArrivalValue(firstSearchResult.address,firstSearchResult.name,firstSearchResult.code)} 
+                                                             sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 ,cursor:'pointer',p:1, ":hover":{bgcolor:'#FFF1ED'}}}>
+                                                               <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
+                                                                 <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
+                                                                 <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
+                                                               </Box>
+                                                               <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>{firstSearchResult.code}</Typography>
+                                                             </Paper>
+                                                           </Box>
                                           </>
                                         }
                         </Paper>
