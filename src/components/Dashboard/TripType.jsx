@@ -18,7 +18,9 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns';
 import NewRoute from './NewRoute';
-import SearchTypeContext from '../context/searchTypeContext';
+import SearchTypeContext from '../../context/searchTypeContext';
+
+
 export default function TripType() {
 
 
@@ -203,8 +205,9 @@ export default function TripType() {
 const{regularSearch,fareType}=useContext(SearchTypeContext)
 
 
+
 // handle submit
-const handleSubmit=()=>{
+const handleSubmit=async()=>{
   const searchValue={
     passengers: [
     {
@@ -250,7 +253,19 @@ const handleSubmit=()=>{
       departureDate: selectedDateReturn.toLocaleDateString('en-CA')
     });
   }
-console.log(searchValue)
+
+  console.log(searchValue)
+
+  const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0MGU4MzEyNDMyMDRiN2ZiN2NiYzJiM2NmYzk0ZWExIiwiZW1haWwiOiJhZnJpZGlAZmx5ZmFyLnRlY2giLCJwaG9uZU51bWJlciI6Ijg4MDEzMjI5MDMyOTgiLCJzZXNzaW9uSWQiOiJlYnhRb2RZVExUcWpkdDhYM0dMZmpXdWNUVnFIWmZTWiIsImlhdCI6MTc0MTIzMjQxNCwiZXhwIjoxNzQxOTIzNjE0fQ.EAWGrM0WbXngTDaatnl9bsTvFKrBq3NVzEaos_PuYRo'
+
+  const response = await axios.post("https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/user/air-search",{ ...searchValue },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  console.log(response.data)
+
 }
 
   return (

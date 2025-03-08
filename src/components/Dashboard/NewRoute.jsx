@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Paper, Typography, Stack, Divider, Input } from '@mui/material';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import FlightLandIcon from '@mui/icons-material/FlightLand';
@@ -10,7 +10,9 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 
+
 export default function NewRoute() {
+
     const [flights, setFlights] = useState([{ id: crypto.randomUUID(), departure: null, arrival: null, date: new Date() }]);
 
     const addFlight = () => {
@@ -81,7 +83,7 @@ export default function NewRoute() {
       departureDate: new Date(flight.date).toISOString().split('T')[0] 
   }));
   
-  console.log(formattedFlights);
+
   
     return (
         <>
