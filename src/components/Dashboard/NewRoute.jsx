@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Paper, Typography, Stack, Divider } from '@mui/material';
+import { Box, Paper, Typography, Stack, Divider, Input } from '@mui/material';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import FlightLandIcon from '@mui/icons-material/FlightLand';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { BiSolidPlaneAlt } from "react-icons/bi";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { MdAddCircle } from 'react-icons/md';
+import axios from 'axios';
 
 export default function NewRoute() {
     const [flights, setFlights] = useState([{ id: crypto.randomUUID() }]);
@@ -18,6 +19,96 @@ export default function NewRoute() {
     const removeFlight = (id) => {
         setFlights(flights.filter(flight => flight.id !== id));
     };
+
+    //main functionality
+     //search-1
+  const [firstSearch, setFirstSearch] = useState(false)
+  const handleFirstSearchOpen = () => {
+    setFirstSearch(!firstSearch);
+    setSecondSearch(false);
+  }
+  //value
+  const [firstSearchResult, setFirstSearchResult] = useState({
+    address: "Dhaka, Bangladesh",
+    name: "Hazrat Sha Jalal Intl Airport",
+    code: "DAC"
+  })
+
+  const handleFirstSearchValueChange = async (event) => {
+    const value = event.target.value.toLowerCase();
+    // console.log(value)
+    const response = await axios.post(
+      "https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion",
+      { keyword: value }
+    );
+    setFirstSearchResult({
+      address: response.data.data[0].result.address || "Dhaka, Bangladesh",
+      name: response.data.data[0].result.name || "Hazrat Sha Jalal Intl Airport",
+      code: response.data.data[0].result.code || "DAC"
+    });
+
+  };
+
+
+
+  //search-2
+  const [secondSearch, setSecondSearch] = useState(false)
+  const handleSecondSearchOpen = () => {
+    setSecondSearch(!secondSearch);
+    setFirstSearch(false);
+  }
+
+  //vaue
+  // const [secondSearchValue, setSecondSearchValue] = useState('')
+  const handleSecondSearchValueChange = async (event) => {
+    const value = event.target.value.toLowerCase();
+    // console.log(value)
+    const response = await axios.post(
+      "https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion",
+      { keyword: value }
+    );
+    setFirstSearchResult({
+      address: response.data.data[0].result.address || "Dhaka, Bangladesh",
+      name: response.data.data[0].result.name || "Hazrat Sha Jalal Intl Airport",
+      code: response.data.data[0].result.code || "DAC"
+    });
+  };
+
+
+  //departure value
+  const [departureValue, setDepartureValue] = useState({
+    address: "Dhaka, Bangladesh",
+    name: "Hazrat Sha Jalal Intl Airport",
+    code: "DAC"
+  })
+
+  const handleDepartureValue=(address,name,code)=>{
+    setDepartureValue({
+  address:address,
+  name:name,
+  code:code
+    })
+    setFirstSearch(false)
+  }
+
+
+  
+  //arrival value
+  const [arrivalValue, setArrivalValue] = useState({
+    address: "Dhaka, Bangladesh",
+    name: "Hazrat Sha Jalal Intl Airport",
+    code: "DAC"
+  })
+
+  const handleArrivalValue=(address,name,code)=>{
+    setArrivalValue({
+  address:address,
+  name:name,
+  code:code
+    })
+    setSecondSearch(false)
+  }
+
 
     return (
         <>
@@ -45,14 +136,52 @@ export default function NewRoute() {
                             gap: 1,
                         }}
                     >
-                        <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
+                        <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' ,position: 'relative'}}>
                             <FlightTakeoffIcon />
-                            <Typography sx={{ fontWeight: 500 }}>DXB, Dubai Intl Airport</Typography>
+                            <Typography onClick={handleFirstSearchOpen} sx={{ fontWeight: 500,cursor: 'pointer' }}>DXB, Dubai Intl Airport</Typography>
+
+{/* pop up 1 */}
+                            {
+                                        firstSearch && <>
+                          
+                                          <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '30', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
+                                            <Input onChange={handleFirstSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
+                                            <Paper 
+                                            onClick={()=>handleDepartureValue(firstSearchResult.address,firstSearchResult.name, firstSearchResult.code)}
+                                            sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1, cursor:'pointer',p:1, ":hover":{bgcolor:'#FFF1ED'} }}>
+                                              <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
+                                                <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
+                                                <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
+                                              </Box>
+                                              <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>{firstSearchResult.code}</Typography>
+                                            </Paper>
+                                          </Box>
+                                        </>
+                                      }
                         </Paper>
 
-                        <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
+
+{/* second row */}
+                        <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none',position:'relative' }}>
                             <FlightLandIcon />
-                            <Typography sx={{ fontWeight: 500 }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+                            <Typography onClick={handleSecondSearchOpen} sx={{ fontWeight: 500,cursor:'pointer' }}>DAC, Hazrat Sha Jalal Intl Airport</Typography>
+                             {/* Search 2 */}
+                                        {
+                                          secondSearch && <>
+                            
+                                            <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '30', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
+                                              <Input onChange={handleSecondSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
+                                              <Paper onClick={()=>handleArrivalValue(firstSearchResult.address,firstSearchResult.name,firstSearchResult.code)} 
+                                              sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 ,cursor:'pointer',p:1, ":hover":{bgcolor:'#FFF1ED'}}}>
+                                                <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
+                                                  <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
+                                                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
+                                                </Box>
+                                                <Typography sx={{ fontWeight: 'bold', color: '#E34825' }}>{firstSearchResult.code}</Typography>
+                                              </Paper>
+                                            </Box>
+                                          </>
+                                        }
                         </Paper>
                     </Box>
 
