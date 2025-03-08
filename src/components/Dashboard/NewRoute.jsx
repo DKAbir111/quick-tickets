@@ -207,6 +207,7 @@ export default function NewRoute() {
                             gridRow: "span 2",
                             gridColumn: { md: "span 2", xs: "span 1" },
                             cursor: 'pointer',
+                            
                         }}
                     >
                         <Paper sx={{ padding: 1, textAlign: "center", gap: 2, display: 'flex', boxShadow: 'none' }}>
