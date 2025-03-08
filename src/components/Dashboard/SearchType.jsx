@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { FormControl, FormControlLabel, InputLabel, MenuItem, Radio, RadioGroup, Select } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import SearchTypeContext from "../context/searchTypeContext";
-
+import '../../App.css'
 const SearchType = () => {
   
  const {setRegularSearch, setFareType,regularSearch,fareType}=useContext(SearchTypeContext)

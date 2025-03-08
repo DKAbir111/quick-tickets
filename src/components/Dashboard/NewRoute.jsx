@@ -7,6 +7,8 @@ import { BiSolidPlaneAlt } from "react-icons/bi";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { MdAddCircle } from 'react-icons/md';
 import axios from 'axios';
+import { format } from 'date-fns';
+import DatePicker from 'react-datepicker';
 
 export default function NewRoute() {
     const [flights, setFlights] = useState([{ id: crypto.randomUUID() }]);
@@ -110,6 +112,18 @@ export default function NewRoute() {
   }
 
 
+    //date
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const monthName = selectedDate ? format(selectedDate, 'MMMM') : '';
+    const dayName = selectedDate ? format(selectedDate, 'eeee') : '';
+    const dayOfMonth = selectedDate ? selectedDate.getDate() : '';
+    const toggleCalendar = () => {
+      setIsCalendarOpen((prev) => !prev);
+    };
+   
+
+
     return (
         <>
             {flights.map((flight, index) => (
@@ -187,24 +201,35 @@ export default function NewRoute() {
 
                     {/* Second Column */}
                     <Box
+                    onClick={toggleCalendar}
                         sx={{
                             gridRow: "span 2",
                             gridColumn: { md: "span 2", xs: "span 1" },
-                            cursor: 'pointer'
+                            cursor: 'pointer',
                         }}
                     >
                         <Paper sx={{ padding: 1, textAlign: "center", gap: 2, display: 'flex', boxShadow: 'none' }}>
                             <CalendarMonthIcon style={{ width: '24px' }} />
                             <Stack alignItems="center">
                                 <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>
-                                    March
+                                    {monthName}
                                 </Typography>
-                                <Typography variant="h3">8</Typography>
+                                <Typography variant="h3">{dayOfMonth}</Typography>
                                 <Typography variant="caption" sx={{ fontWeight: 500, fontSize: '14px' }}>
-                                    Saturday
+                                  {dayName}
                                 </Typography>
                             </Stack>
                         </Paper>
+                           {/* date picker */}
+                                  {isCalendarOpen && (
+                        
+                                    <DatePicker
+                                      selected={selectedDate}
+                                      onChange={(date) => setSelectedDate(date)}
+                                      inline
+                                    />
+                        
+                                  )}
                     </Box>
 
                     {/* Remove Flight Button */}

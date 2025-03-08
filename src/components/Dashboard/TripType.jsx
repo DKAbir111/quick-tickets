@@ -408,7 +408,7 @@ console.log(searchValue)
           {isCalendarReturnOpen && (
 
             <DatePicker
-              selected={selectedDate}
+              selected={selectedDateReturn}
               onChange={(date) => setSelectedDateReturn(date)}
               inline
             />
