@@ -12,20 +12,20 @@ import SearchContextProvider from "../context/SearchContextProvider";
 
 export default function DashBoardPage() {
   return (
-<SearchContextProvider>
+    <SearchContextProvider>
 
-<Container sx={{ py: { md: 3, xs: 0 }, px: 0, backgroundColor: '#ececec' }}>
-      <TopBarMobile />
-      <Box sx={{ px: 2 }}>
+      <Container sx={{ py: { md: 3, xs: 0 }, px: 0, backgroundColor: '#ececec' }}>
+        <TopBarMobile />
+        <Box sx={{ px: 2 }}>
 
-        <Topbar />
-        <TicketType />
-        <TripType />
-        <RecentSearch />
-        <Discount />
-      </Box>
-    </Container>
+          <Topbar />
+          <TicketType />
+          <TripType />
+          <RecentSearch />
+          <Discount />
+        </Box>
+      </Container>
 
-</SearchContextProvider>
+    </SearchContextProvider>
   );
 }

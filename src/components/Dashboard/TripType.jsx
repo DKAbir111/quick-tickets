@@ -1,4 +1,4 @@
-import { Button, FormControl, FormControlLabel, Input, Radio, RadioGroup, Stack, Typography } from '@mui/material'
+import { Button, CircularProgress, FormControl, FormControlLabel, Input, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -19,6 +19,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns';
 import NewRoute from './NewRoute';
 import SearchTypeContext from '../../context/searchTypeContext';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function TripType() {
@@ -34,7 +35,7 @@ export default function TripType() {
     setIsCalendarOpen((prev) => !prev);
     setIsCalendarReturnOpen(false)
   };
- 
+
 
   //date-return
   const [isCalendarReturnOpen, setIsCalendarReturnOpen] = useState(false);
@@ -79,10 +80,10 @@ export default function TripType() {
   const handleClassChange = (e) => {
     e.preventDefault()
     setNewClass(e.target.value)
-  
+
     setClassOpen(false)
   }
-// console.log(newClass)
+  // console.log(newClass)
 
   //passenger
   const [passengerOpen, setPasengerOpen] = useState(false)
@@ -93,7 +94,7 @@ export default function TripType() {
 
   }
 
-  const [adult, setAdult] = useState(0);
+  const [adult, setAdult] = useState(1);
   const [children, setChildren] = useState(0);
   const [infant, setInfant] = useState(0);
 
@@ -133,6 +134,7 @@ export default function TripType() {
       "https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/admin/airports/search-suggestion",
       { keyword: value }
     );
+    console.log(response.data)
     setFirstSearchResult({
       address: response.data.data[0].result.address || "Dhaka, Bangladesh",
       name: response.data.data[0].result.name || "Hazrat Sha Jalal Intl Airport",
@@ -174,17 +176,17 @@ export default function TripType() {
     code: "DAC"
   })
 
-  const handleDepartureValue=(address,name,code)=>{
+  const handleDepartureValue = (address, name, code) => {
     setDepartureValue({
-  address:address,
-  name:name,
-  code:code
+      address: address,
+      name: name,
+      code: code
     })
     setFirstSearch(false)
   }
 
 
-  
+
   //arrival value
   const [arrivalValue, setArrivalValue] = useState({
     address: "Dhaka, Bangladesh",
@@ -192,84 +194,90 @@ export default function TripType() {
     code: "DAC"
   })
 
-  const handleArrivalValue=(address,name,code)=>{
+  const handleArrivalValue = (address, name, code) => {
     setArrivalValue({
-  address:address,
-  name:name,
-  code:code
+      address: address,
+      name: name,
+      code: code
     })
     setSecondSearch(false)
   }
 
-//search type
-const{regularSearch,fareType}=useContext(SearchTypeContext)
+  //search type
+  const { regularSearch, fareType } = useContext(SearchTypeContext)
 
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  // handle submit
+  const handleSubmit = async () => {
+    setLoading(true)
+    const searchValue = {
+      passengers: [
+        {
+          type: "ADT",
+          count: adult,
+          ages: []
+        },
+        {
+          type: "CNN",
+          count: children,
+          ages: []
+        },
+        {
+          type: "INF",
+          count: infant,
+          ages: []
+        }
+      ],
+      cabin: newClass,
+      tripType: tripType,
+      "vendorPref": [],
+      studentFare: fareType === "studentFare" ? true : false,
+      umrahFare: fareType === "umrahFare" ? true : false,
+      seamanFare: fareType === "seamanFare" ? true : false,
+      segmentsList: [
+        {
+          departure: departureValue.code,
+          arrival: arrivalValue.code,
+          departureDate: selectedDate.toLocaleDateString('en-CA')
+        }
+      ],
+      advanceSearch: regularSearch === "advancedSearch" ? true : false,
+      "classes": [],
+      "paxDetails": [],
+      "bookingId": ""
 
-
-// handle submit
-const handleSubmit=async()=>{
-  const searchValue={
-    passengers: [
-    {
-      type: "ADT",
-      count: adult,
-      ages: []
-    },
-    {
-      type: "CNN",
-      count: children,
-      ages: []
-    },
-    {
-      type: "INF",
-      count: infant,
-      ages: []
     }
-  ],
-  cabin: newClass,
-  tripType: tripType,
-  "vendorPref": [],
-  studentFare: fareType==="studentFare"?true:false,
-  umrahFare:  fareType==="umrahFare"?true:false,
-  seamanFare: fareType==="seamanFare"?true:false,
-  segmentsList: [
-    {
-      departure:departureValue.code ,
-      arrival: arrivalValue.code,
-      departureDate: selectedDate.toLocaleDateString('en-CA')
+
+    if (tripType === "roundway") {
+      searchValue.segmentsList.push({
+        departure: arrivalValue.code,
+        arrival: departureValue.code,
+        departureDate: selectedDateReturn.toLocaleDateString('en-CA')
+      });
     }
-    ],
-  advanceSearch: regularSearch==="advancedSearch"?true:false,
-  "classes": [],
-  "paxDetails": [],
-  "bookingId": ""
-  
-  }
 
-  if (tripType === "roundway") {
-    searchValue.segmentsList.push({
-      departure: arrivalValue.code,
-      arrival: departureValue.code,
-      departureDate: selectedDateReturn.toLocaleDateString('en-CA')
-    });
-  }
+    console.log(searchValue)
 
-  console.log(searchValue)
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0MGU4MzEyNDMyMDRiN2ZiN2NiYzJiM2NmYzk0ZWExIiwiZW1haWwiOiJhZnJpZGlAZmx5ZmFyLnRlY2giLCJwaG9uZU51bWJlciI6Ijg4MDEzMjI5MDMyOTgiLCJzZXNzaW9uSWQiOiJlYnhRb2RZVExUcWpkdDhYM0dMZmpXdWNUVnFIWmZTWiIsImlhdCI6MTc0MTIzMjQxNCwiZXhwIjoxNzQxOTIzNjE0fQ.EAWGrM0WbXngTDaatnl9bsTvFKrBq3NVzEaos_PuYRo'
 
-  const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ0MGU4MzEyNDMyMDRiN2ZiN2NiYzJiM2NmYzk0ZWExIiwiZW1haWwiOiJhZnJpZGlAZmx5ZmFyLnRlY2giLCJwaG9uZU51bWJlciI6Ijg4MDEzMjI5MDMyOTgiLCJzZXNzaW9uSWQiOiJlYnhRb2RZVExUcWpkdDhYM0dMZmpXdWNUVnFIWmZTWiIsImlhdCI6MTc0MTIzMjQxNCwiZXhwIjoxNzQxOTIzNjE0fQ.EAWGrM0WbXngTDaatnl9bsTvFKrBq3NVzEaos_PuYRo'
-
-  const response = await axios.post("https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/user/air-search",{ ...searchValue },{
+    const response = await axios.post("https://flyfar-int-v2-user-panel.de.r.appspot.com/api/v1/user/air-search", { ...searchValue }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
-  );
-  console.log(response.data)
+    );
 
-}
+    if (response.data) {
+      setLoading(false)
+      console.log(response.data)
+      navigate('/search-result')
+    }
+
+  }
 
   return (
-    <Box sx={{ my: 4 }}>
+    <Box sx={{ mt: 4, mb: { xs: 15, md: 4 } }}>
       {/* button */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
         <Button onClick={() => changeTripType('oneway')} variant={`${tripType === "oneway" ? "contained" : "text"}`} sx={{ textTransform: 'none', backgroundColor: tripType === "oneway" ? '#202124' : '', color: tripType === "oneway" ? '' : '#202124', boxShadow: 'none', fontWeight: 500 }}>One Way</Button>
@@ -284,7 +292,7 @@ const handleSubmit=async()=>{
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { md: "repeat(13, 1fr)", xs: "repeat(2, 1fr)" },
+          gridTemplateColumns: { md: "repeat(14, 1fr)", xs: "repeat(2, 1fr)" },
           gridTemplateRows: { md: "repeat(2, 55px)", xs: "repeat(8, 55px)" },
           gap: 1,
           py: 5,
@@ -293,7 +301,7 @@ const handleSubmit=async()=>{
         {/* First Column */}
         <Box
           sx={{
-            gridColumn: { md: tripType === "multicity" ? "span 6" : "span 4", xs: "span 2" },
+            gridColumn: { md: tripType === "multicity" ? "span 7" : "span 5", xs: "span 2" },
             display: "flex",
             flexDirection: "column",
             gridRow: 'span 2',
@@ -302,16 +310,16 @@ const handleSubmit=async()=>{
           }}
         >
           <Paper sx={{ position: 'relative', padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
-            <FlightTakeoffIcon /> <Typography onClick={handleFirstSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>{departureValue.code+","+departureValue.name}</Typography>
+            <FlightTakeoffIcon /> <Typography onClick={handleFirstSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>{departureValue.code + "," + departureValue.name}</Typography>
             {/* Search */}
             {
               firstSearch && <>
 
                 <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '30', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
                   <Input onChange={handleFirstSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
-                  <Paper 
-                  onClick={()=>handleDepartureValue(firstSearchResult.address,firstSearchResult.name, firstSearchResult.code)}
-                  sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1, cursor:'pointer',p:1, ":hover":{bgcolor:'#FFF1ED'} }}>
+                  <Paper
+                    onClick={() => handleDepartureValue(firstSearchResult.address, firstSearchResult.name, firstSearchResult.code)}
+                    sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1, cursor: 'pointer', p: 1, ":hover": { bgcolor: '#FFF1ED' } }}>
                     <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
                       <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
                       <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
@@ -325,16 +333,17 @@ const handleSubmit=async()=>{
           </Paper>
 
           <Paper sx={{ position: 'relative', padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none' }}>
-            <FlightLandIcon /> <Typography onClick={handleSecondSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>{arrivalValue.code+","+arrivalValue.name}</Typography>
+            <FlightLandIcon /> <Typography onClick={handleSecondSearchOpen} sx={{ cursor: 'pointer', fontWeight: 500 }}>{arrivalValue.code + "," + arrivalValue.name}</Typography>
             {/* Search 2 */}
             {
               secondSearch && <>
 
                 <Box sx={{ position: 'absolute', left: '0px', top: '63px', bgcolor: 'white', zIndex: '30', px: 2, pb: 2, pt: 1, width: '100%', boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}>
                   <Input onChange={handleSecondSearchValueChange} placeholder="Placeholder" sx={{ width: '100%' }} />
-                  <Paper onClick={()=>handleArrivalValue(firstSearchResult.address,firstSearchResult.name,firstSearchResult.code)} 
-                  sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1 ,cursor:'pointer',p:1, ":hover":{bgcolor:'#FFF1ED'}}}>
-                    <Box sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
+                  <Paper onClick={() => handleArrivalValue(firstSearchResult.address, firstSearchResult.name, firstSearchResult.code)}
+                    sx={{ display: 'flex', justifyContent: 'space-between', boxShadow: 'none', alignItems: 'center', mt: 1, cursor: 'pointer', p: 1, ":hover": { bgcolor: '#FFF1ED' } }}>
+                    <Box
+                      sx={{ display: 'flex ', flexDirection: 'column', alignItems: 'start', gap: '4px' }}>
                       <Typography sx={{ fontWeight: 'bold' }}>{firstSearchResult.address}</Typography>
                       <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#595959' }}>{firstSearchResult.name}</Typography>
                     </Box>
@@ -374,12 +383,19 @@ const handleSubmit=async()=>{
 
           {/* date picker */}
           {isCalendarOpen && (
-
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-              inline
-            />
+            <Box sx={{
+              position: 'absolute',
+              zIndex: 40,
+            }}>
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => {
+                  setSelectedDate(date)
+                  toggleCalendar()
+                }}
+                inline
+              />
+            </Box>
 
           )}
         </Box>
@@ -421,12 +437,20 @@ const handleSubmit=async()=>{
           }
           {/* date picker */}
           {isCalendarReturnOpen && (
-
-            <DatePicker
-              selected={selectedDateReturn}
-              onChange={(date) => setSelectedDateReturn(date)}
-              inline
-            />
+            <Box sx={{
+              position: 'absolute',
+              zIndex: 40,
+              right: { xs: "5%", md: 'auto' }
+            }}>
+              <DatePicker
+                selected={selectedDateReturn}
+                onChange={(date) => {
+                  setSelectedDateReturn(date)
+                  toggleCalendarReturn()
+                }}
+                inline
+              />
+            </Box>
 
           )}
         </Box>
@@ -509,7 +533,6 @@ const handleSubmit=async()=>{
                       <Paper onClick={() => handleInfantChange(-1)} sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>-</Paper> <Typography sx={{ fontWeight: '600' }}>{infant} </Typography>
                       <Paper onClick={() => handleInfantChange(1)} sx={{ borderRadius: '50%', height: '20px', width: '20px', backgroundColor: '#E34825', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: '18px', cursor: 'pointer' }}>+</Paper>
 
-
                     </Box>
 
                   </Paper>
@@ -518,26 +541,40 @@ const handleSubmit=async()=>{
                 </Box>
               </>
             }
-
-
           </Paper>
         </Box>
 
         {/* Last column */}
         <Box
-        onClick={
-          handleSubmit
-        }
+          onClick={handleSubmit}
           sx={{
             gridRow: "span 2",
             gridColumn: { xs: "span 2 ", md: 'span 2' },
-            cursor: 'pointer'
-            // width: { md: '134px', xs: "100%" }
+            cursor: 'pointer',
+            width: '100%',
           }}
         >
-          <Paper sx={{ padding: 2, display: 'flex', backgroundColor: '#2a2e2d', color: 'white', height: '100%', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <SearchIcon sx={{ fontSize: '45px' }} />
-            <Typography sx={{ fontWeight: 500, fontSize: '17px' }}>Search</Typography>
+          <Paper
+            sx={{
+              padding: 2,
+              display: 'flex',
+              backgroundColor: '#2a2e2d',
+              color: 'white',
+              height: '100%',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+            }}
+          >
+            {loading ? (
+              <CircularProgress sx={{ color: 'white', position: 'absolute' }} />
+            ) : (
+              <>
+                <SearchIcon sx={{ fontSize: '45px' }} />
+                <Typography sx={{ fontWeight: 500, fontSize: '17px' }}>Search</Typography>
+              </>
+            )}
           </Paper>
         </Box>
 

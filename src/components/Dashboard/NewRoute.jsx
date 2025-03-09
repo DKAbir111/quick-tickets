@@ -78,13 +78,13 @@ export default function NewRoute() {
     };
 
     const formattedFlights = flights.map(flight => ({
-      departure: flight.departure?.code || 'DAC',  
-      arrival: flight.arrival?.code || 'DAC',       
-      departureDate: new Date(flight.date).toISOString().split('T')[0] 
-  }));
-  
+        departure: flight.departure?.code || 'DAC',
+        arrival: flight.arrival?.code || 'DAC',
+        departureDate: new Date(flight.date).toISOString().split('T')[0]
+    }));
 
-  
+
+
     return (
         <>
             {flights.map((flight, index) => (
@@ -94,7 +94,7 @@ export default function NewRoute() {
                     </Divider>
 
                     {/* First Column */}
-                    <Box sx={{ gridColumn: { md: "span 6", xs: "span 2" }, display: "flex", flexDirection: "column", gridRow: 'span 2', gap: 1 }}>
+                    <Box sx={{ gridColumn: { md: "span 7", xs: "span 2" }, display: "flex", flexDirection: "column", gridRow: 'span 2', gap: 1 }}>
                         <Paper sx={{ padding: 2, textAlign: "center", display: 'flex', alignItems: 'center', gap: 1, boxShadow: 'none', position: 'relative' }}>
                             <FlightTakeoffIcon />
                             <Typography onClick={() => toggleSearch(flight.id, 'departure')} sx={{ cursor: 'pointer', fontWeight: 500 }}>
@@ -153,13 +153,19 @@ export default function NewRoute() {
                         </Paper>
 
                         {searchState[flight.id]?.calendar && (
-                            <DatePicker
-                                selected={flight.date}
-                                onChange={(date) => updateFlightData(flight.id, 'date', date)}
-                                inline
-                            />
+                            <Box sx={{
+                                position: 'absolute',
+                                zIndex: 40,
+                            }}>
+                                <DatePicker
+                                    selected={flight.date}
+                                    onChange={(date) => updateFlightData(flight.id, 'date', date)}
+                                    inline
+                                />
+                            </Box>
                         )}
                     </Box>
+
 
                     {/* Remove Flight Button */}
                     <Box sx={{ gridRow: "span 2", display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#E34825', cursor: 'pointer' }} onClick={() => removeFlight(flight.id)}>

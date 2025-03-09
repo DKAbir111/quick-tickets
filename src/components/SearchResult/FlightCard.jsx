@@ -17,6 +17,7 @@ const FlightCard = () => {
         borderRadius: 1,
         backgroundColor: "white",
         boxShadow: "none",
+
         gap: { md: 2, xs: 2 }
       }}
     >
@@ -28,7 +29,9 @@ const FlightCard = () => {
         display: 'flex',
         alignItems: 'center',
         gap: { md: 3, xs: 1 },
-        order: 1
+        order: 1,
+
+
       }}>
 
         {/* plane */}
@@ -61,7 +64,9 @@ const FlightCard = () => {
         alignItems: "center",
         gridColumn: "span 3",
         justifyContent: "space-evenly",
-        order: { md: 2, xs: 3 }
+        order: { md: 2, xs: 3 },
+
+
       }}>
         <Box>
           <Typography fontWeight="500" color="#333333" sx={{ fontSize: { xs: '20px', md: '24px' } }}>DAC</Typography>
@@ -96,7 +101,9 @@ const FlightCard = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: { md: 1, xs: '3px' },
-        order: { md: 3, xs: 2 }
+        order: { md: 3, xs: 2 },
+        // mb: '6px'
+        // py: 1
       }}>
         <Box display="flex" alignItems="center">
           <ErrorOutlineIcon color="error" fontSize="small" />
@@ -117,7 +124,9 @@ const FlightCard = () => {
         gridColumn: 'span 1',
         display: { md: 'flex', xs: 'none' },
         flexDirection: 'column',
-        order: 4
+        order: 4,
+        mt: '4px'
+
 
 
       }} >
